@@ -35,6 +35,7 @@ flutter:
 
   assets:
     - assets/fonts/bodoni/
+    - assets/fonts/inter/
     - assets/images/
     - assets/icons/
 

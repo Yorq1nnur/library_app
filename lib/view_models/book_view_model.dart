@@ -10,6 +10,8 @@ class BookViewModel extends ChangeNotifier {
 
   String statusText = "";
 
+  List<BooksModel> categoryBooks = [];
+
   bool isLoading = false;
 
   BookViewModel({required this.bookRepo}){
