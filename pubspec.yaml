@@ -1,0 +1,58 @@
+name: library_app
+description: "A new Flutter project."
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.3.1 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.6
+  flutter_svg: ^2.0.10+1
+  flutter_staggered_grid_view: ^0.7.0
+  flutter_screenutil: ^5.9.0
+  http: ^1.2.1
+  cached_network_image: ^3.3.1
+  shared_preferences: ^2.2.2
+  zoom_tap_animation: ^1.1.0
+  provider: ^6.1.2
+  url_launcher: ^6.2.5
+  carousel_slider: ^4.2.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^3.0.0
+
+flutter:
+
+  uses-material-design: true
+
+  assets:
+    - assets/fonts/bodoni/
+    - assets/images/
+    - assets/icons/
+
+  fonts:
+    - family: Bodoni
+      fonts:
+        - asset: assets/fonts/bodoni/BodoniFLF-Bold.ttf
+        - asset: assets/fonts/bodoni/BodoniFLF-BoldItalic.ttf
+        - asset: assets/fonts/bodoni/BodoniFLF-Italic.ttf
+          style: italic
+        - asset: assets/fonts/bodoni/BodoniFLF-Roman.ttf
+
+    - family: Inter
+      fonts:
+        - asset: assets/fonts/inter/Inter-Black.otf
+        - asset: assets/fonts/inter/Inter-Bold.otf
+        - asset: assets/fonts/inter/Inter-Italic.otf
+        - asset: assets/fonts/inter/Inter-Light.otf
+        - asset: assets/fonts/inter/Inter-Medium.otf
+        - asset: assets/fonts/inter/Inter-Regular.otf
+        - asset: assets/fonts/inter/Inter-SemiBold.otf
