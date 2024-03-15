@@ -57,7 +57,7 @@ class BookViewModel extends ChangeNotifier {
     }
   }
 
-  Future<void> deleteBook(String bookUUID) async {
+  Future<void> deleteBook({required String bookUUID}) async {
     _notify(true);
     MyResponse myResponse = await bookRepo.deleteBook(bookUUID);
     _notify(false);

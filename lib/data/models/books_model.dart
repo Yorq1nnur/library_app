@@ -67,7 +67,7 @@ class BooksModel {
   }) {
     return BooksModel(
       uuid: uuid ?? this.uuid,
-      bookName: name ?? this.bookName,
+      bookName: name ?? bookName,
       author: author ?? this.author,
       categoryId: categoryId ?? this.categoryId,
       categoryName: categoryName ?? this.categoryName,

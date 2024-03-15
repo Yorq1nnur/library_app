@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:library_app/data/models/books_model.dart';
 import 'package:library_app/data/models/categories/categories.dart';
+import 'package:library_app/screens/detail/detail_screen.dart';
 import 'package:library_app/screens/home/widget/book_item.dart';
 import 'package:library_app/screens/home/widget/category_button.dart';
 import 'package:library_app/utils/colors/app_colors.dart';
 import 'package:library_app/utils/styles/app_text_style.dart';
 import 'package:library_app/view_models/book_view_model.dart';
 import 'package:provider/provider.dart';
-import '../../data/repositories/book_repo.dart';
 import '../../utils/images/app_images.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -16,9 +16,8 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final BookRepo bookRepo = BookRepo();
-
-    List<BooksModel> books = [];
+    // final BookRepo bookRepo = BookRepo();
+    // List<BooksModel> books = [];
 
     return Scaffold(
       appBar: AppBar(
@@ -106,7 +105,16 @@ class HomeScreen extends StatelessWidget {
                                 linkPicture: book.imageUrl,
                                 bookName: book.bookName,
                                 author: book.author,
-                                onTap: () {},
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => DetailScreen(
+                                        booksModel: book,
+                                      ),
+                                    ),
+                                  );
+                                },
                               );
                             })
                           ],
