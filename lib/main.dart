@@ -1,21 +1,31 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:library_app/data/repositories/book_repo.dart';
+import 'package:library_app/screens/global_screen/global_screen.dart';
 import 'package:library_app/utils/colors/app_colors.dart';
-import 'screens/global_screen/global_screen.dart';
+import 'package:library_app/view_models/book_view_model.dart';
+import 'package:provider/provider.dart';
+
+class MyHttpOverrides extends HttpOverrides {
+  @override
+  HttpClient createHttpClient(SecurityContext? context) {
+    return super.createHttpClient(context)
+      ..badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
+  }
+}
 
 void main() {
   runApp(
-    // MultiProvider(
-    //   providers: [
-    //     ChangeNotifierProvider(
-    //       create: (_) => CountryViewModel(
-    //         countryRepo: CountryRepo(),
-    //       ),
-    //     ),
-    //   ],
-    //   child: const MyApp(),
-    // ),
-    const MyApp()
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (_) => BookViewModel(bookRepo: BookRepo()),
+        ),
+      ],
+      child: const MyApp(),
+    ),
   );
 }
 
@@ -26,7 +36,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScreenUtilInit(
       designSize: const Size(
-        375,
+        326,
         812,
       ),
       builder: (context, child) {
@@ -40,7 +50,9 @@ class MyApp extends StatelessWidget {
           home: child,
         );
       },
-      child: const GlobalScreen(),
+      child: const GlobalScreen(
+        title: 'LIBRARY',
+      ),
     );
   }
 }
