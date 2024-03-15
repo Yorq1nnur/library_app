@@ -21,7 +21,9 @@ void main() {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (_) => BookViewModel(bookRepo: BookRepo()),
+          create: (_) => BookViewModel(
+            bookRepo: BookRepo(),
+          ),
         ),
       ],
       child: const MyApp(),
