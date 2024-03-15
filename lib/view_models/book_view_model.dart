@@ -12,7 +12,9 @@ class BookViewModel extends ChangeNotifier {
 
   bool isLoading = false;
 
-  BookViewModel({required this.bookRepo});
+  BookViewModel({required this.bookRepo}){
+    getAllBooks();
+  }
 
   final BookRepo bookRepo;
 

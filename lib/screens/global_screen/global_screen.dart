@@ -62,10 +62,30 @@ class _GlobalScreenState extends State<GlobalScreen> {
                         imagesPath.addAll(
                           context.watch<BookViewModel>().allBooks[index].images,
                         );
-                        BooksModel first =
+                        BooksModel book =
                             context.watch<BookViewModel>().allBooks[index];
                         return ListTile(
-                          title: Text(first.bookName),
+                          onTap: () {},
+                          title: Text(
+                            book.bookName,
+                          ),
+                          subtitle: Text(
+                            book.description,
+                          ),
+                          trailing: Container(
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: AppColors.black,
+                                width: 1,
+                              ),
+                            ),
+                            child: Image.network(
+                              book.imageUrl,
+                              height: 50.h,
+                              width: 50.w,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
                         );
                       },
                     ),
