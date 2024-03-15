@@ -1,11 +1,11 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:library_app/data/models/my_response.dart';
-import 'package:library_app/data/models/product_model.dart';
+import 'package:library_app/data/models/books_model.dart';
 import 'package:library_app/utils/constants/app_constants.dart';
 
 class ApiProvider {
-  static Future<MyResponse> getAllProducts() async {
+  static Future<MyResponse> getAllBooks() async {
     Uri uri = Uri.https(AppConstants.baseUrl, "/api/v1/library");
     try {
       http.Response response = await http.get(
@@ -19,7 +19,7 @@ class ApiProvider {
       if (response.statusCode == 200) {
         return MyResponse(
           data: (jsonDecode(response.body)["items"] as List?)
-                  ?.map((e) => ProductModel.fromJson(e))
+                  ?.map((e) => BooksModel.fromJson(e))
                   .toList() ??
               [],
         );
@@ -30,7 +30,7 @@ class ApiProvider {
     }
   }
 
-  static Future<MyResponse> addProduct(ProductModel productModel) async {
+  static Future<MyResponse> addNewBook(BooksModel productModel) async {
     Uri uri = Uri.https(AppConstants.baseUrl, "/api/v1/library");
     try {
       http.Response response = await http.post(
@@ -50,7 +50,7 @@ class ApiProvider {
     }
   }
 
-  static Future<MyResponse> deleteProduct(String productUUID) async {
+  static Future<MyResponse> deleteBook(String productUUID) async {
     Uri uri = Uri.https(AppConstants.baseUrl, "/api/v1/library");
     try {
       http.Response response = await http.delete(
@@ -72,7 +72,7 @@ class ApiProvider {
     }
   }
 
-  static Future<MyResponse> updateProduct(ProductModel productModel) async {
+  static Future<MyResponse> updateBook(BooksModel productModel) async {
     Uri uri = Uri.https(AppConstants.baseUrl, "/api/v1/library");
     try {
       http.Response response = await http.put(
