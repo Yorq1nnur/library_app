@@ -26,7 +26,7 @@ class _GlobalScreenState extends State<GlobalScreen> {
       child: Scaffold(
         appBar: AppBar(
           title: Text(
-            "HOMEWORK",
+            "LIBRARY",
             style: AppTextStyle.interBold.copyWith(
               color: AppColors.black,
               fontSize: 20.sp,
