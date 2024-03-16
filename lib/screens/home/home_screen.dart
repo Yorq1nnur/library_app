@@ -12,13 +12,13 @@ import 'package:provider/provider.dart';
 import '../../utils/images/app_images.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  const HomeScreen({super.key});
 
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  HomeScreenState createState() => HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class HomeScreenState extends State<HomeScreen> {
   String searchText = '';
 
   @override
@@ -48,102 +48,104 @@ class _HomeScreenState extends State<HomeScreen> {
                 size: 24.w,
               ),
             ),
-
           ],
         ),
         body: context.watch<BookViewModel>().isLoading
             ? const Center(child: CircularProgressIndicator())
             : RefreshIndicator(
-          onRefresh: () {
-            return Future<void>.delayed(
-              const Duration(seconds: 2),
-                  () {
-                context.read<BookViewModel>().getAllBooks();
-              },
-            );
-          },
-          child: Stack(
-            children: [
-              Image.asset(
-                AppImages.back,
-                height: double.infinity,
-                width: double.infinity,
-                fit: BoxFit.cover,
-              ),
-              Column(
-                children: [
-                  SingleChildScrollView(
-                    physics: const BouncingScrollPhysics(),
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                onRefresh: () {
+                  return Future<void>.delayed(
+                    const Duration(seconds: 2),
+                    () {
+                      context.read<BookViewModel>().getAllBooks();
+                    },
+                  );
+                },
+                child: Stack(
+                  children: [
+                    Image.asset(
+                      AppImages.back,
+                      height: double.infinity,
+                      width: double.infinity,
+                      fit: BoxFit.cover,
+                    ),
+                    Column(
                       children: [
-                        ...List.generate(
-                          categories.length,
-                              (index) => CategoryButton(
-                            title: categories[index],
-                            onTap: () {},
+                        SingleChildScrollView(
+                          physics: const BouncingScrollPhysics(),
+                          scrollDirection: Axis.horizontal,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              ...List.generate(
+                                categories.length,
+                                (index) => CategoryButton(
+                                  title: categories[index],
+                                  onTap: () {},
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 24.w, vertical: 10.h),
+                          child: TextField(
+                            onChanged: (value) {
+                              setState(() {
+                                searchText = value;
+                              });
+                            },
+                            decoration: const InputDecoration(
+                              labelText: 'Search',
+                              border: OutlineInputBorder(),
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: GridView.count(
+                            primary: false,
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 20.w,
+                              vertical: 40.h,
+                            ),
+                            crossAxisSpacing: 10,
+                            mainAxisSpacing: 10,
+                            crossAxisCount: 2,
+                            childAspectRatio: 0.45,
+                            children: [
+                              ...context
+                                  .watch<BookViewModel>()
+                                  .allBooks
+                                  .where((book) => book.bookName
+                                      .toLowerCase()
+                                      .contains(searchText.toLowerCase()))
+                                  .map(
+                                    (book) => BookItem(
+                                      linkPicture: book.imageUrl,
+                                      bookName: book.bookName,
+                                      author: book.author,
+                                      onTap: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => DetailScreen(
+                                              booksModel: book,
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                  ),
+                            ],
                           ),
                         ),
                       ],
                     ),
-                  ),
-                  Padding(
-                    padding:  EdgeInsets.symmetric(horizontal:24.w,vertical: 10.h),
-                    child: TextField(
-                      onChanged: (value) {
-                        setState(() {
-                          searchText = value;
-                        });
-                      },
-                      decoration: InputDecoration(
-                        labelText: 'Search',
-                        border: OutlineInputBorder(),
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: GridView.count(
-                      primary: false,
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 20.w,
-                        vertical: 40.h,
-                      ),
-                      crossAxisSpacing: 10,
-                      mainAxisSpacing: 10,
-                      crossAxisCount: 2,
-                      childAspectRatio: 0.45,
-                      children: [
-                        ...context
-                            .watch<BookViewModel>()
-                            .allBooks
-                            .where((book) => book.bookName.toLowerCase().contains(searchText.toLowerCase()))
-                            .map((book) => BookItem(
-                          linkPicture: book.imageUrl,
-                          bookName: book.bookName,
-                          author: book.author,
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => DetailScreen(
-                                  booksModel: book,
-                                ),
-                              ),
-                            );
-                          },
-                        ))
-                            .toList(),
-                      ],
-                    ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ],
-          ),
-        ),
       ),
     );
   }
 }
-
