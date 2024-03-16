@@ -19,7 +19,6 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     // final BookRepo bookRepo = BookRepo();
     // List<BooksModel> books = [];
-    String category = 'All';
 
     return AnnotatedRegion(
         value: const SystemUiOverlayStyle(
@@ -88,7 +87,6 @@ class HomeScreen extends StatelessWidget {
                                   (index) => CategoryButton(
                                     title: categories[index],
                                     onTap: () {
-                                      category = categories[index];
                                     },
                                   ),
                                 ),
