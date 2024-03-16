@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -87,13 +86,7 @@ class HomeScreenState extends State<HomeScreen> {
                                   title: categories[index],
                                   onTap: () {
                                     name=categories[index];
-                                    if (kDebugMode) {
-                                      print(name);
-                                    }
                                     context.read<BookViewModel>().getCategoriesBook(name:name);
-                                    if (kDebugMode) {
-                                      print(context.watch<BookViewModel>().allBooks[0].categoryName);
-                                    }
                                   },
                                 ),
                               ),
