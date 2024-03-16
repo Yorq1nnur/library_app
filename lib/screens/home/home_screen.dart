@@ -77,7 +77,9 @@ class HomeScreenState extends State<HomeScreen> {
             : RefreshIndicator(
                 onRefresh: () {
                   return Future<void>.delayed(
-                    const Duration(seconds: 2),
+                    const Duration(
+                      seconds: 2,
+                    ),
                     () {
                       context.read<BookViewModel>().getAllBooks();
                     },
