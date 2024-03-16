@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:library_app/data/models/categories/categories.dart';
+import 'package:library_app/screens/add_book/add_book_screen.dart';
 import 'package:library_app/screens/detail/detail_screen.dart';
 import 'package:library_app/screens/home/widget/book_item.dart';
 import 'package:library_app/screens/home/widget/category_button.dart';
@@ -42,8 +43,8 @@ class HomeScreenState extends State<HomeScreen> {
                 ),
                 child: Image.asset(
                   AppImages.library,
-                  height: 50.h,
-                  width: 50.h,
+                  height: 30.h,
+                  width: 30.h,
                   fit: BoxFit.contain,
                 )),
           ),
@@ -56,7 +57,14 @@ class HomeScreenState extends State<HomeScreen> {
           ),
           actions: [
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const AddBookScreen(),
+                  ),
+                );
+              },
               icon: Icon(
                 Icons.add,
                 color: AppColors.c06070D,
@@ -70,7 +78,9 @@ class HomeScreenState extends State<HomeScreen> {
             : RefreshIndicator(
                 onRefresh: () {
                   return Future<void>.delayed(
-                    const Duration(seconds: 2),
+                    const Duration(
+                      seconds: 2,
+                    ),
                     () {
                       Provider.of<BookViewModel>(context, listen: false);
                       context.read<BookViewModel>().getCategoriesBook(
@@ -146,9 +156,12 @@ class HomeScreenState extends State<HomeScreen> {
                               ...context
                                   .watch<BookViewModel>()
                                   .allBooks
-                                  .where((book) => book.bookName
-                                      .toLowerCase()
-                                      .contains(searchText.toLowerCase()))
+                                  .where(
+                                    (book) =>
+                                        book.bookName.toLowerCase().contains(
+                                              searchText.toLowerCase(),
+                                            ),
+                                  )
                                   .map(
                                     (book) => BookItem(
                                       linkPicture: book.imageUrl,
