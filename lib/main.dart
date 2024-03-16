@@ -1,8 +1,8 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:library_app/screens/home/home_screen.dart';
 import 'package:library_app/data/repositories/book_repo.dart';
+import 'package:library_app/screens/splash/splash_screen.dart';
 import 'package:library_app/utils/colors/app_colors.dart';
 import 'package:library_app/view_models/book_view_model.dart';
 import 'package:provider/provider.dart';
@@ -52,61 +52,7 @@ class MyApp extends StatelessWidget {
           home: child,
         );
       },
-      child: const HomeScreen(),
+      child: const SplashScreen(),
     );
   }
 }
-// import 'package:flutter/material.dart';
-//
-// class MyTextField extends StatefulWidget {
-//   @override
-//   _MyTextFieldState createState() => _MyTextFieldState();
-// }
-//
-// class _MyTextFieldState extends State<MyTextField> {
-//   TextEditingController _controller = TextEditingController();
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: Text('Text Field Example'),
-//       ),
-//       body: Padding(
-//         padding: const EdgeInsets.all(8.0),
-//         child: Column(
-//           crossAxisAlignment: CrossAxisAlignment.start,
-//           children: <Widget>[
-//             TextField(
-//               controller: _controller,
-//               decoration: InputDecoration(
-//                 labelText: 'Enter your text',
-//               ),
-//             ),
-//             SizedBox(height: 20),
-//             ElevatedButton(
-//               onPressed: () {
-//                 print('Text entered: ${_controller.text}');
-//                 // You can use _controller.text for further processing
-//               },
-//               child: Text('Submit'),
-//             ),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-//
-//   @override
-//   void dispose() {
-//     super.dispose();
-//     _controller.dispose();
-//
-//   }
-// }
-//
-// void main() {
-//   runApp(MaterialApp(
-//     home: MyTextField(),
-//   ));
-// }

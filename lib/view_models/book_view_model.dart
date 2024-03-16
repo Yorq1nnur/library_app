@@ -7,14 +7,11 @@ import 'package:library_app/data/repositories/book_repo.dart';
 class BookViewModel extends ChangeNotifier {
   List<BooksModel> allBooks = [];
 
-
   String statusText = "";
-
-  List<BooksModel> categoryBooks = [];
 
   bool isLoading = false;
 
-  BookViewModel({required this.bookRepo}){
+  BookViewModel({required this.bookRepo}) {
     getAllBooks();
   }
 
@@ -67,6 +64,28 @@ class BookViewModel extends ChangeNotifier {
       getAllBooks();
     } else {
       statusText = myResponse.errorText;
+    }
+  }
+
+  Future<void> getCategoriesBook({required String name}) async {
+    _notify(true);
+    MyResponse myResponse = await bookRepo.getAllBooks();
+    _notify(false);
+    if (myResponse.errorText.isEmpty) {
+      allBooks = myResponse.data as List<BooksModel>;
+    } else {
+      statusText = myResponse.errorText;
+    }
+    List<BooksModel> categoryBook = [];
+    if (name.isNotEmpty) {
+      if (name != 'All') {
+        categoryBook =
+            allBooks.where((element) => element.categoryName == name).toList();
+        allBooks = categoryBook;
+      }else{
+        getAllBooks();
+      }
+      notifyListeners();
     }
   }
 

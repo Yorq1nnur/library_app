@@ -185,7 +185,24 @@ class _UpdateScreenState extends State<UpdateScreen> {
                             Navigator.pop(context);
                           }
                         },
-                        child: const Text("SAQLASH"),
+                        child: Container(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 10.w,
+                            vertical: 10.h,
+                          ),
+                          decoration: BoxDecoration(
+                            color: Colors.lightBlueAccent,
+                            borderRadius: BorderRadius.circular(
+                              16.r,
+                            ),
+                          ),
+                          child: Text(
+                            "SAQLASH",
+                            style: AppTextStyle.interBold.copyWith(
+                              color: Colors.black,
+                            ),
+                          ),
+                        ),
                       ),
                     ],
                   ),

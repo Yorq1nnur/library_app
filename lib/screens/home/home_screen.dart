@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:library_app/data/models/categories/categories.dart';
+import 'package:library_app/screens/add_book/add_book_screen.dart';
 import 'package:library_app/screens/detail/detail_screen.dart';
 import 'package:library_app/screens/home/widget/book_item.dart';
 import 'package:library_app/screens/home/widget/category_button.dart';
@@ -20,6 +21,7 @@ class HomeScreen extends StatefulWidget {
 
 class HomeScreenState extends State<HomeScreen> {
   String searchText = '';
+  String name = 'All';
 
   @override
   Widget build(BuildContext context) {
@@ -33,29 +35,44 @@ class HomeScreenState extends State<HomeScreen> {
         appBar: AppBar(
           centerTitle: true,
           backgroundColor: Colors.white,
-          leading: Padding(
-            padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 8.w),
+          leading: Container(
+            margin: EdgeInsets.symmetric(
+              horizontal: 10.w,
+              vertical: 10.h,
+            ),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(
+                16.r,
+              ),
+            ),
             child: ClipRRect(
                 borderRadius: BorderRadius.circular(
                   16.r,
                 ),
                 child: Image.asset(
                   AppImages.library,
-                  height: 50.h,
-                  width: 50.h,
+                  height: 30.h,
+                  width: 30.h,
                   fit: BoxFit.contain,
                 )),
           ),
           title: Text(
             "My Library",
             style: AppTextStyle.interBold.copyWith(
-              color: AppColors.c06070D,
+              color: AppColors.black,
               fontSize: 24.sp,
             ),
           ),
           actions: [
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const AddBookScreen(),
+                  ),
+                );
+              },
               icon: Icon(
                 Icons.add,
                 color: AppColors.c06070D,
@@ -69,9 +86,14 @@ class HomeScreenState extends State<HomeScreen> {
             : RefreshIndicator(
                 onRefresh: () {
                   return Future<void>.delayed(
-                    const Duration(seconds: 2),
+                    const Duration(
+                      seconds: 2,
+                    ),
                     () {
-                      context.read<BookViewModel>().getAllBooks();
+                      Provider.of<BookViewModel>(context, listen: false);
+                      context.read<BookViewModel>().getCategoriesBook(
+                            name: name,
+                          );
                     },
                   );
                 },
@@ -95,20 +117,31 @@ class HomeScreenState extends State<HomeScreen> {
                                 categories.length,
                                 (index) => CategoryButton(
                                   title: categories[index],
-                                  onTap: () {},
+                                  onTap: () {
+                                    name = categories[index];
+                                    context
+                                        .read<BookViewModel>()
+                                        .getCategoriesBook(name: name);
+                                  },
                                 ),
                               ),
                             ],
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 24.w, vertical: 10.h),
+                          padding: EdgeInsets.only(
+                            left: 24.w,
+                            right: 24.w,
+                            top: 10.h,
+                            bottom: 5.h,
+                          ),
                           child: TextField(
                             onChanged: (value) {
-                              setState(() {
-                                searchText = value;
-                              });
+                              setState(
+                                () {
+                                  searchText = value;
+                                },
+                              );
                             },
                             decoration: const InputDecoration(
                               labelText: 'Search',
@@ -121,7 +154,7 @@ class HomeScreenState extends State<HomeScreen> {
                             primary: false,
                             padding: EdgeInsets.symmetric(
                               horizontal: 20.w,
-                              vertical: 40.h,
+                              vertical: 20.h,
                             ),
                             crossAxisSpacing: 10,
                             mainAxisSpacing: 10,
@@ -131,9 +164,12 @@ class HomeScreenState extends State<HomeScreen> {
                               ...context
                                   .watch<BookViewModel>()
                                   .allBooks
-                                  .where((book) => book.bookName
-                                      .toLowerCase()
-                                      .contains(searchText.toLowerCase()))
+                                  .where(
+                                    (book) =>
+                                        book.bookName.toLowerCase().contains(
+                                              searchText.toLowerCase(),
+                                            ),
+                                  )
                                   .map(
                                     (book) => BookItem(
                                       linkPicture: book.imageUrl,
