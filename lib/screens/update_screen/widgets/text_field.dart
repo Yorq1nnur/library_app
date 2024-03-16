@@ -31,7 +31,7 @@ class _TextFieldItemState extends State<TextFieldItem> {
         vertical: 10.h,
       ),
       child: TextField(
-        onTapAlwaysCalled: true,
+        // onTapAlwaysCalled: true,
         textInputAction: TextInputAction.next,
         controller: widget.controller,
         enabled: true,
