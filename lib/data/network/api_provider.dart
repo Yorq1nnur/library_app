@@ -72,7 +72,7 @@ class ApiProvider {
     }
   }
 
-  static Future<MyResponse> updateBook(BooksModel productModel) async {
+  static Future<MyResponse> updateBook(BooksModel booksModel) async {
     Uri uri = Uri.https(AppConstants.baseUrl, "/api/v1/library");
     try {
       http.Response response = await http.put(
@@ -81,7 +81,7 @@ class ApiProvider {
           "Authorization": "Bearer ${AppConstants.baseToken}",
           "Content-Type": "application/json",
         },
-        body: jsonEncode([productModel.toJsonForUpdate()]),
+        body: jsonEncode([booksModel.toJsonForUpdate()]),
       );
       if (response.statusCode == 200) {
         return MyResponse(data: "Product updated successfully!");

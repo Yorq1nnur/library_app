@@ -1,24 +1,22 @@
 class BooksModel {
-  final String uuid;
+  final String? uuid;
   final String bookName;
   final String author;
-  final int categoryId;
+  final int? categoryId;
   final String categoryName;
   final String description;
   final String imageUrl;
-  final List<String> images;
   final int price;
   final double rate;
 
   BooksModel({
-    required this.uuid,
+     this.uuid,
     required this.bookName,
     required this.author,
-    required this.categoryId,
+     this.categoryId,
     required this.categoryName,
     required this.description,
     required this.imageUrl,
-    required this.images,
     required this.price,
     required this.rate,
   });
@@ -32,7 +30,6 @@ class BooksModel {
       categoryName: json['category_name'] as String? ?? "",
       description: json['description'] as String? ?? "",
       imageUrl: json['image_url'] as String? ?? "",
-      images: List<String>.from(json['images']) as List<String>? ?? [],
       price: json['price'] as int? ?? 0,
       rate: json['rate'].toDouble() as double? ?? 0.0,
     );
@@ -47,7 +44,6 @@ class BooksModel {
       'category_name': categoryName,
       'description': description,
       'image_url': imageUrl,
-      'images': images,
       'price': price,
       'rate': rate,
     };
@@ -61,7 +57,6 @@ class BooksModel {
     String? categoryName,
     String? description,
     String? imageUrl,
-    List<String>? images,
     int? price,
     double? rate,
   }) {
@@ -73,21 +68,19 @@ class BooksModel {
       categoryName: categoryName ?? this.categoryName,
       description: description ?? this.description,
       imageUrl: imageUrl ?? this.imageUrl,
-      images: images ?? this.images,
       price: price ?? this.price,
       rate: rate ?? this.rate,
     );
   }
     Map<String, dynamic> toJsonForUpdate() {
       return {
-        "_uuid": uuid,
+        "_uuid": uuid ?? uuid,
         "name": bookName,
         "author": author,
-        "category_id": categoryId,
+        "category_id": categoryId ?? categoryId,
         "category_name": categoryName,
         "description": description,
         "image_url": imageUrl,
-        "images": images,
         "price": price,
         "rate": rate,
       };
