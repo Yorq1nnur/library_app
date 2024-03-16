@@ -33,8 +33,17 @@ class _UpdateScreenState extends State<UpdateScreen> {
     "",
   ];
 
+
+
   @override
   Widget build(BuildContext context) {
+    const TextInputType bookNameType = TextInputType.text;
+    const TextInputType authorType = TextInputType.text;
+    const TextInputType categoryType = TextInputType.text;
+    const TextInputType descriptionType = TextInputType.text;
+    const TextInputType imageUrlType = TextInputType.text;
+    const TextInputType priceType = TextInputType.number;
+    const TextInputType rateType = TextInputType.number;
     List<String> oldBook = [
       widget.booksModel.bookName,
       widget.booksModel.author,
@@ -43,6 +52,15 @@ class _UpdateScreenState extends State<UpdateScreen> {
       widget.booksModel.imageUrl,
       widget.booksModel.price.toString(),
       widget.booksModel.rate.toString(),
+    ];
+    const List<TextInputType> textInputTypesData = [
+      bookNameType,
+      authorType,
+      categoryType,
+      descriptionType,
+      imageUrlType,
+      priceType,
+      rateType,
     ];
 
     return AnnotatedRegion(
@@ -83,7 +101,6 @@ class _UpdateScreenState extends State<UpdateScreen> {
                               vertical: 10.h,
                             ),
                             child: TextField(
-                              // controller: controllers[index],
                               textInputAction: index == 6
                                   ? TextInputAction.done
                                   : TextInputAction.next,
@@ -99,7 +116,7 @@ class _UpdateScreenState extends State<UpdateScreen> {
                                   print("Current: ${oldBook[index]}");
                                 }
                               },
-                              keyboardType: TextInputType.multiline,
+                              keyboardType: textInputTypesData[index],
                               decoration: InputDecoration(
                                 contentPadding: const EdgeInsets.all(16),
                                 hintText: oldBook[index],

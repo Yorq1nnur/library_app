@@ -29,7 +29,24 @@ List<String> newBook = [
   "",
 ];
 
+const List<TextInputType> textInputTypesData = [
+  bookNameType,
+  authorType,
+  categoryType,
+  descriptionType,
+  imageUrlType,
+  priceType,
+  rateType,
+];
+
 bool isValid = true;
+const TextInputType bookNameType = TextInputType.text;
+const TextInputType authorType = TextInputType.text;
+const TextInputType categoryType = TextInputType.text;
+const TextInputType descriptionType = TextInputType.text;
+const TextInputType imageUrlType = TextInputType.text;
+const TextInputType priceType = TextInputType.number;
+const TextInputType rateType = TextInputType.number;
 
 class _AddBookScreenState extends State<AddBookScreen> {
   @override
@@ -116,7 +133,6 @@ class _AddBookScreenState extends State<AddBookScreen> {
                                 horizontal: 20.w,
                               ),
                               child: TextField(
-                                // controller: controllers[index],
                                 textInputAction: index == 6
                                     ? TextInputAction.done
                                     : TextInputAction.next,
@@ -132,7 +148,7 @@ class _AddBookScreenState extends State<AddBookScreen> {
                                     print("Current: ${newBook[index]}");
                                   }
                                 },
-                                keyboardType: TextInputType.multiline,
+                                keyboardType: textInputTypesData[index],
                                 decoration: InputDecoration(
                                   contentPadding: const EdgeInsets.all(16),
                                   hintText: titles[index],
