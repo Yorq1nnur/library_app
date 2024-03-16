@@ -11,7 +11,7 @@ import '../../data/models/variables/variables.dart';
 import '../../view_models/book_view_model.dart';
 
 class UpdateScreen extends StatefulWidget {
-  UpdateScreen({
+  const UpdateScreen({
     super.key,
     required this.booksModel,
   });
