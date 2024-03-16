@@ -62,11 +62,57 @@ class DetailScreen extends StatelessWidget {
                       ),
                       IconButton(
                         onPressed: () async {
-                          context.read<BookViewModel>().deleteBook(
-                                bookUUID: booksModel.uuid,
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                backgroundColor: AppColors.white,
+                                title: const Text("Ishonchingiz komilmi?"),
+                                titleTextStyle: AppTextStyle.interBold.copyWith(
+                                  color: AppColors.black,
+                                  fontSize: 20.sp,
+                                ),
+                                actions: <Widget>[
+                                  TextButton(
+                                    onPressed: () async {
+                                      context.read<BookViewModel>().deleteBook(
+                                            bookUUID: booksModel.uuid,
+                                          );
+                                      Future.delayed(
+                                        const Duration(seconds: 1),
+                                      );
+                                      Navigator.pop(context);
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                        const SnackBar(
+                                          content: Text(
+                                            "SUCCESS",
+                                          ),
+                                        ),
+                                      );
+                                      Navigator.pop(context);
+                                    },
+                                    child: Text(
+                                      'Yes',
+                                      style: AppTextStyle.interBold.copyWith(
+                                        color: AppColors.black,
+                                      ),
+                                    ),
+                                  ),
+                                  TextButton(
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                    child: Text(
+                                      'No',
+                                      style: AppTextStyle.interBold
+                                          .copyWith(color: AppColors.black),
+                                    ),
+                                  ),
+                                ],
                               );
-                          Future.delayed(const Duration(seconds: 1));
-                          Navigator.pop(context);
+                            },
+                          );
                         },
                         icon: Icon(
                           Icons.delete,
@@ -106,21 +152,29 @@ class DetailScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-                  SizedBox(height: 18.h),
+                  SizedBox(
+                    height: 18.h,
+                  ),
                   Text(
                     booksModel.bookName,
                     style: AppTextStyle.interSemiBold
                         .copyWith(color: AppColors.c0F0F10, fontSize: 16.sp),
                   ),
-                  SizedBox(height: 6.h),
+                  SizedBox(
+                    height: 6.h,
+                  ),
                   Text(
                     booksModel.author,
                     style: AppTextStyle.interMedium
                         .copyWith(color: AppColors.c9D9EA8, fontSize: 13.sp),
                   ),
-                  SizedBox(height: 20.h),
                   SizedBox(
-                    child: Text(booksModel.description),
+                    height: 20.h,
+                  ),
+                  SizedBox(
+                    child: Text(
+                      booksModel.description,
+                    ),
                   )
                 ],
               ),

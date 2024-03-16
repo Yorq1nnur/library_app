@@ -18,14 +18,17 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     // final BookRepo bookRepo = BookRepo();
     // List<BooksModel> books = [];
+    String category = 'All';
 
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
         title: Text(
           "My Library",
-          style: AppTextStyle.interBold
-              .copyWith(color: AppColors.c06070D, fontSize: 24.sp),
+          style: AppTextStyle.interBold.copyWith(
+            color: AppColors.c06070D,
+            fontSize: 24.sp,
+          ),
         ),
         actions: [
           IconButton(
@@ -77,7 +80,9 @@ class HomeScreen extends StatelessWidget {
                               categories.length,
                               (index) => CategoryButton(
                                 title: categories[index],
-                                onTap: () {},
+                                onTap: () {
+                                  category = categories[index];
+                                },
                               ),
                             ),
                           ],
@@ -93,30 +98,31 @@ class HomeScreen extends StatelessWidget {
                           crossAxisSpacing: 10,
                           mainAxisSpacing: 10,
                           crossAxisCount: 2,
-                          childAspectRatio: 0.49,
+                          childAspectRatio: 0.45,
                           children: [
                             ...List.generate(
-                                context.watch<BookViewModel>().allBooks.length,
-                                (index) {
-                              BooksModel book = context
-                                  .watch<BookViewModel>()
-                                  .allBooks[index];
-                              return BookItem(
-                                linkPicture: book.imageUrl,
-                                bookName: book.bookName,
-                                author: book.author,
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => DetailScreen(
-                                        booksModel: book,
+                              context.watch<BookViewModel>().allBooks.length,
+                              (index) {
+                                BooksModel book = context
+                                    .watch<BookViewModel>()
+                                    .allBooks[index];
+                                return BookItem(
+                                  linkPicture: book.imageUrl,
+                                  bookName: book.bookName,
+                                  author: book.author,
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => DetailScreen(
+                                          booksModel: book,
+                                        ),
                                       ),
-                                    ),
-                                  );
-                                },
-                              );
-                            })
+                                    );
+                                  },
+                                );
+                              },
+                            ),
                           ],
                         ),
                       ),
