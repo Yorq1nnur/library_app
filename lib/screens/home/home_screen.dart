@@ -115,6 +115,7 @@ class HomeScreenState extends State<HomeScreen> {
                             left: 24.w,
                             right: 24.w,
                             top: 10.h,
+                            bottom: 5.h,
                           ),
                           child: TextField(
                             onChanged: (value) {
