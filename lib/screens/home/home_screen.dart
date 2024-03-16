@@ -113,7 +113,9 @@ class HomeScreenState extends State<HomeScreen> {
                         ),
                         Padding(
                           padding: EdgeInsets.symmetric(
-                              horizontal: 24.w, vertical: 10.h),
+                            horizontal: 24.w,
+                            vertical: 10.h,
+                          ),
                           child: TextField(
                             onChanged: (value) {
                               setState(
