@@ -141,16 +141,45 @@ class _UpdateScreenState extends State<UpdateScreen> {
                           //   }
                           // }
                           BooksModel book = BooksModel(
-                            bookName: changeData[0]==''?widget.booksModel.bookName:changeData[0],
-                            author: changeData[1]==''?widget.booksModel.author:changeData[1],
-                            categoryName: changeData[2]==''?widget.booksModel.categoryName:changeData[2],
-                            description: changeData[3]==''?widget.booksModel.description:changeData[3],
-                            imageUrl: changeData[4]==''?widget.booksModel.imageUrl:changeData[4],
-                            price: int.parse(changeData[5]==''?widget.booksModel.price.toString():changeData[5]),
-                            rate: double.parse(changeData[6]==''?widget.booksModel.rate.toString():changeData[6]),
+                            bookName: changeData[0] == ''
+                                ? widget.booksModel.bookName
+                                : changeData[0],
+                            author: changeData[1] == ''
+                                ? widget.booksModel.author
+                                : changeData[1],
+                            categoryName: changeData[2] == ''
+                                ? widget.booksModel.categoryName
+                                : changeData[2],
+                            description: changeData[3] == ''
+                                ? widget.booksModel.description
+                                : changeData[3],
+                            imageUrl: changeData[4] == ''
+                                ? widget.booksModel.imageUrl
+                                : changeData[4],
+                            price: int.parse(changeData[5] == ''
+                                ? widget.booksModel.price.toString()
+                                : changeData[5]),
+                            rate: double.parse(changeData[6] == ''
+                                ? widget.booksModel.rate.toString()
+                                : changeData[6],),
                             uuid: widget.booksModel.uuid,
                           );
                           await context.read<BookViewModel>().updateBook(book);
+                          if(context.mounted){
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                  "SUCCESS",
+                                  style: AppTextStyle.interBold.copyWith(
+                                    color: Colors.lightBlue,
+                                    fontSize: 20.sp,
+                                    fontWeight: FontWeight.w700,
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
+                            );
+                          }
                           isUpdated == true;
                           if (context.mounted) {
                             Navigator.pop(context);
