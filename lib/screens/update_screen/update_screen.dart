@@ -49,8 +49,6 @@ class _UpdateScreenState extends State<UpdateScreen> {
 
   @override
   Widget build(BuildContext context) {
-
-
     List<String> oldBook = [
       widget.booksModel.bookName,
       widget.booksModel.author,
@@ -69,8 +67,6 @@ class _UpdateScreenState extends State<UpdateScreen> {
       rateController,
       authorController,
     ];
-
-
 
     return AnnotatedRegion(
       value: const SystemUiOverlayStyle(
@@ -104,21 +100,23 @@ class _UpdateScreenState extends State<UpdateScreen> {
                     children: [
                       ...List.generate(
                         controllers.length,
-                            (index) {
+                        (index) {
                           return Padding(
                             padding: EdgeInsets.symmetric(
                               vertical: 10.h,
                             ),
                             child: TextField(
                               // controller: controllers[index],
-                              textInputAction: index == 6 ? TextInputAction.done : TextInputAction.next,
+                              textInputAction: index == 6
+                                  ? TextInputAction.done
+                                  : TextInputAction.next,
                               readOnly: false,
                               enabled: true,
                               maxLines: 1,
                               onChanged: (value) {
                                 changeData[index] = value;
                               },
-                              onSubmitted: (v){
+                              onSubmitted: (v) {
                                 changeData[index] = v;
                                 if (kDebugMode) {
                                   print("Current: ${oldBook[index]}");
@@ -161,7 +159,8 @@ class _UpdateScreenState extends State<UpdateScreen> {
                           for (int i = 0; i < controllers.length; i++) {
                             if (kDebugMode) {
                               print(
-                                  "==================================${changeData[i]}\n");
+                                "==================================${changeData[i]}\n",
+                              );
                             }
                           }
                           BooksModel book = BooksModel(
