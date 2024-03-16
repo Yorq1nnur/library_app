@@ -31,7 +31,21 @@ class HomeScreenState extends State<HomeScreen> {
       ),
       child: Scaffold(
         appBar: AppBar(
+          centerTitle: true,
           backgroundColor: Colors.white,
+          leading: Padding(
+            padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 8.w),
+            child: ClipRRect(
+                borderRadius: BorderRadius.circular(
+                  16.r,
+                ),
+                child: Image.asset(
+                  AppImages.library,
+                  height: 50.h,
+                  width: 50.h,
+                  fit: BoxFit.contain,
+                )),
+          ),
           title: Text(
             "My Library",
             style: AppTextStyle.interBold.copyWith(
