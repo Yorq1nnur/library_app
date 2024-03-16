@@ -21,6 +21,7 @@ class HomeScreen extends StatefulWidget {
 
 class HomeScreenState extends State<HomeScreen> {
   String searchText = '';
+  String name = 'All';
 
   @override
   Widget build(BuildContext context) {
@@ -81,7 +82,10 @@ class HomeScreenState extends State<HomeScreen> {
                       seconds: 2,
                     ),
                     () {
-                      context.read<BookViewModel>().getAllBooks();
+                      Provider.of<BookViewModel>(context, listen: false);
+                      context.read<BookViewModel>().getCategoriesBook(
+                            name: name,
+                          );
                     },
                   );
                 },
@@ -105,16 +109,23 @@ class HomeScreenState extends State<HomeScreen> {
                                 categories.length,
                                 (index) => CategoryButton(
                                   title: categories[index],
-                                  onTap: () {},
+                                  onTap: () {
+                                    name = categories[index];
+                                    context
+                                        .read<BookViewModel>()
+                                        .getCategoriesBook(name: name);
+                                  },
                                 ),
                               ),
                             ],
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: 24.w,
-                            vertical: 10.h,
+                          padding: EdgeInsets.only(
+                            left: 24.w,
+                            right: 24.w,
+                            top: 10.h,
+                            bottom: 5.h,
                           ),
                           child: TextField(
                             onChanged: (value) {
