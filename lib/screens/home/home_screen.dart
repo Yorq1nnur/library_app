@@ -114,9 +114,11 @@ class HomeScreenState extends State<HomeScreen> {
                               horizontal: 24.w, vertical: 10.h),
                           child: TextField(
                             onChanged: (value) {
-                              setState(() {
-                                searchText = value;
-                              });
+                              setState(
+                                () {
+                                  searchText = value;
+                                },
+                              );
                             },
                             decoration: const InputDecoration(
                               labelText: 'Search',
@@ -139,9 +141,12 @@ class HomeScreenState extends State<HomeScreen> {
                               ...context
                                   .watch<BookViewModel>()
                                   .allBooks
-                                  .where((book) => book.bookName
-                                      .toLowerCase()
-                                      .contains(searchText.toLowerCase()))
+                                  .where(
+                                    (book) =>
+                                        book.bookName.toLowerCase().contains(
+                                              searchText.toLowerCase(),
+                                            ),
+                                  )
                                   .map(
                                     (book) => BookItem(
                                       linkPicture: book.imageUrl,
