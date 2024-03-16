@@ -1,15 +1,35 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:library_app/data/models/books_model.dart';
 import 'package:library_app/utils/styles/app_text_style.dart';
+import 'package:provider/provider.dart';
+import 'package:zoom_tap_animation/zoom_tap_animation.dart';
 import '../../utils/colors/app_colors.dart';
 import '../../utils/images/app_images.dart';
+import '../../view_models/book_view_model.dart';
 
-class AddBookScreen extends StatelessWidget {
+class AddBookScreen extends StatefulWidget {
   const AddBookScreen({
     super.key,
   });
 
+  @override
+  State<AddBookScreen> createState() => _AddBookScreenState();
+}
+
+List<String> newBook = [
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+];
+
+class _AddBookScreenState extends State<AddBookScreen> {
   @override
   Widget build(BuildContext context) {
     return AnnotatedRegion(
@@ -79,6 +99,99 @@ class AddBookScreen extends StatelessWidget {
                     ],
                   ),
                 ),
+                Expanded(
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.vertical,
+                    physics: const BouncingScrollPhysics(),
+                    child: Column(
+                      children: [
+                        ...List.generate(
+                          titles.length,
+                          (index) {
+                            return Padding(
+                              padding: EdgeInsets.symmetric(
+                                vertical: 10.h,
+                              ),
+                              child: TextField(
+                                // controller: controllers[index],
+                                textInputAction: index == 6
+                                    ? TextInputAction.done
+                                    : TextInputAction.next,
+                                readOnly: false,
+                                enabled: true,
+                                maxLines: 1,
+                                onChanged: (value) {
+                                  newBook[index] = value;
+                                },
+                                onSubmitted: (v) {
+                                  newBook[index] = v;
+                                  if (kDebugMode) {
+                                    print("Current: ${newBook[index]}");
+                                  }
+                                },
+                                keyboardType: TextInputType.multiline,
+                                decoration: InputDecoration(
+                                  contentPadding: const EdgeInsets.all(16),
+                                  hintText: titles[index],
+                                  hintStyle: AppTextStyle.interMedium,
+                                  focusedBorder: const OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      width: 1,
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                  disabledBorder: const OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      width: 1,
+                                      color: Colors.blue,
+                                    ),
+                                  ),
+                                  enabledBorder: const OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      width: 1,
+                                      color: Colors.red,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                        SizedBox(
+                          height: 20.h,
+                        ),
+                        ZoomTapAnimation(
+                          onTap: () async {
+                            Future.delayed(const Duration(seconds: 3));
+                            for (int i = 0; i < titles.length; i++) {
+                              if (kDebugMode) {
+                                print(
+                                  "==================================${newBook[i]}\n",
+                                );
+                              }
+                            }
+                            BooksModel book = BooksModel(
+                              bookName: newBook[0],
+                              author: newBook[1],
+                              categoryName: newBook[2],
+                              description: newBook[3],
+                              imageUrl: newBook[4],
+                              price: int.parse(newBook[5]),
+                              rate: double.parse(newBook[6]),
+                            );
+                            await context.read<BookViewModel>().addBook(book);
+                            if (context.mounted) {
+                              Navigator.pop(context);
+                            }
+                          },
+                          child: const Text(
+                            "SAQLASH",
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                )
               ],
             )
           ],
@@ -87,3 +200,13 @@ class AddBookScreen extends StatelessWidget {
     );
   }
 }
+
+List<String> titles = [
+  "Kitob nomi",
+  "Muallifi",
+  "Kategoriya nomi",
+  "Izoh",
+  "Rasm linki",
+  "Narxi",
+  "Bahosi",
+];
