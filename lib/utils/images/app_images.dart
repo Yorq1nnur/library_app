@@ -12,5 +12,6 @@ class AppImages {
   static const String library = "assets/images/library.jpg";
   static const String book = "assets/images/book.jpg";
 
-  //.gif
+  //lottie
+  static const String lottie = "assets/lottie/lottie.json";
 }
