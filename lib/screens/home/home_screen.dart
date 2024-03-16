@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:library_app/data/models/books_model.dart';
 import 'package:library_app/data/models/categories/categories.dart';
 import 'package:library_app/screens/detail/detail_screen.dart';
 import 'package:library_app/screens/home/widget/book_item.dart';
