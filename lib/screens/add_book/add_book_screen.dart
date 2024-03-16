@@ -29,6 +29,8 @@ List<String> newBook = [
   "",
 ];
 
+bool isValid = true;
+
 class _AddBookScreenState extends State<AddBookScreen> {
   @override
   Widget build(BuildContext context) {
@@ -111,6 +113,7 @@ class _AddBookScreenState extends State<AddBookScreen> {
                             return Padding(
                               padding: EdgeInsets.symmetric(
                                 vertical: 10.h,
+                                horizontal: 20.w,
                               ),
                               child: TextField(
                                 // controller: controllers[index],
@@ -162,26 +165,48 @@ class _AddBookScreenState extends State<AddBookScreen> {
                         ),
                         ZoomTapAnimation(
                           onTap: () async {
-                            Future.delayed(const Duration(seconds: 3));
+                            Future.delayed(
+                              const Duration(
+                                seconds: 3,
+                              ),
+                            );
                             for (int i = 0; i < titles.length; i++) {
+                              if (newBook[i].isEmpty) {
+                                isValid = false;
+                              }else{
+                                isValid = true;
+                              }
                               if (kDebugMode) {
                                 print(
                                   "==================================${newBook[i]}\n",
                                 );
                               }
                             }
-                            BooksModel book = BooksModel(
-                              bookName: newBook[0],
-                              author: newBook[1],
-                              categoryName: newBook[2],
-                              description: newBook[3],
-                              imageUrl: newBook[4],
-                              price: int.parse(newBook[5]),
-                              rate: double.parse(newBook[6]),
-                            );
-                            await context.read<BookViewModel>().addBook(book);
+
+                               if(isValid == true){
+                                 BooksModel book = BooksModel(
+                                   bookName: newBook[0],
+                                   author: newBook[1],
+                                   categoryName: newBook[2],
+                                   description: newBook[3],
+                                   imageUrl: newBook[4],
+                                   price: int.parse(newBook[5]),
+                                   rate: double.parse(newBook[6]),
+                                 );
+                                 await context
+                                     .read<BookViewModel>()
+                                     .addBook(book);
+                               }else{
+                                 ScaffoldMessenger.of(context).showSnackBar(
+                                   const SnackBar(
+                                     content: Text(
+                                       "You didn't fill in some line!!!",
+                                     ),
+                                   ),
+                                 );
+                               }
                             if (context.mounted) {
-                              Navigator.pop(context);
+                              isValid ? Navigator.pop(context) : null;
                             }
                           },
                           child: const Text(
