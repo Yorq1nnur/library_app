@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:library_app/data/models/books_model.dart';
 import 'package:library_app/data/models/categories/categories.dart';
 import 'package:library_app/screens/detail/detail_screen.dart';
 import 'package:library_app/screens/home/widget/book_item.dart';
@@ -12,133 +11,139 @@ import 'package:library_app/view_models/book_view_model.dart';
 import 'package:provider/provider.dart';
 import '../../utils/images/app_images.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({Key? key}) : super(key: key);
+
+  @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  String searchText = '';
 
   @override
   Widget build(BuildContext context) {
-    // final BookRepo bookRepo = BookRepo();
-    // List<BooksModel> books = [];
-
     return AnnotatedRegion(
-        value: const SystemUiOverlayStyle(
-          statusBarColor: AppColors.transparent,
-          statusBarIconBrightness: Brightness.dark,
-          statusBarBrightness: Brightness.light,
-        ),
-        child: Scaffold(
-          appBar: AppBar(
-            backgroundColor: Colors.white,
-            title: Text(
-              "My Library",
-              style: AppTextStyle.interBold.copyWith(
+      value: const SystemUiOverlayStyle(
+        statusBarColor: AppColors.transparent,
+        statusBarIconBrightness: Brightness.dark,
+        statusBarBrightness: Brightness.light,
+      ),
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          title: Text(
+            "My Library",
+            style: AppTextStyle.interBold.copyWith(
+              color: AppColors.c06070D,
+              fontSize: 24.sp,
+            ),
+          ),
+          actions: [
+            IconButton(
+              onPressed: () {},
+              icon: Icon(
+                Icons.add,
                 color: AppColors.c06070D,
-                fontSize: 24.sp,
+                size: 24.w,
               ),
             ),
-            actions: [
-              IconButton(
-                onPressed: () {},
-                icon: Icon(
-                  Icons.add,
-                  color: AppColors.c06070D,
-                  size: 24.w,
-                ),
+
+          ],
+        ),
+        body: context.watch<BookViewModel>().isLoading
+            ? const Center(child: CircularProgressIndicator())
+            : RefreshIndicator(
+          onRefresh: () {
+            return Future<void>.delayed(
+              const Duration(seconds: 2),
+                  () {
+                context.read<BookViewModel>().getAllBooks();
+              },
+            );
+          },
+          child: Stack(
+            children: [
+              Image.asset(
+                AppImages.back,
+                height: double.infinity,
+                width: double.infinity,
+                fit: BoxFit.cover,
               ),
-              IconButton(
-                onPressed: () {},
-                icon: Icon(
-                  Icons.search_rounded,
-                  color: AppColors.c06070D,
-                  size: 24.w,
-                ),
+              Column(
+                children: [
+                  SingleChildScrollView(
+                    physics: const BouncingScrollPhysics(),
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        ...List.generate(
+                          categories.length,
+                              (index) => CategoryButton(
+                            title: categories[index],
+                            onTap: () {},
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding:  EdgeInsets.symmetric(horizontal:24.w,vertical: 10.h),
+                    child: TextField(
+                      onChanged: (value) {
+                        setState(() {
+                          searchText = value;
+                        });
+                      },
+                      decoration: InputDecoration(
+                        labelText: 'Search',
+                        border: OutlineInputBorder(),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: GridView.count(
+                      primary: false,
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 20.w,
+                        vertical: 40.h,
+                      ),
+                      crossAxisSpacing: 10,
+                      mainAxisSpacing: 10,
+                      crossAxisCount: 2,
+                      childAspectRatio: 0.45,
+                      children: [
+                        ...context
+                            .watch<BookViewModel>()
+                            .allBooks
+                            .where((book) => book.bookName.toLowerCase().contains(searchText.toLowerCase()))
+                            .map((book) => BookItem(
+                          linkPicture: book.imageUrl,
+                          bookName: book.bookName,
+                          author: book.author,
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => DetailScreen(
+                                  booksModel: book,
+                                ),
+                              ),
+                            );
+                          },
+                        ))
+                            .toList(),
+                      ],
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
-          body: context.watch<BookViewModel>().isLoading
-              ? const Center(child: CircularProgressIndicator())
-              : RefreshIndicator(
-                  onRefresh: () {
-                    return Future<void>.delayed(
-                      const Duration(seconds: 2),
-                      () {
-                        context.read<BookViewModel>().getAllBooks();
-                      },
-                    );
-                  },
-                  child: Stack(
-                    children: [
-                      Image.asset(
-                        AppImages.back,
-                        height: double.infinity,
-                        width: double.infinity,
-                        fit: BoxFit.cover,
-                      ),
-                      Column(
-                        children: [
-                          SingleChildScrollView(
-                            physics: const BouncingScrollPhysics(),
-                            scrollDirection: Axis.horizontal,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                ...List.generate(
-                                  categories.length,
-                                  (index) => CategoryButton(
-                                    title: categories[index],
-                                    onTap: () {
-                                    },
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Expanded(
-                            child: GridView.count(
-                              primary: false,
-                              padding: EdgeInsets.symmetric(
-                                horizontal: 20.w,
-                                vertical: 40.h,
-                              ),
-                              crossAxisSpacing: 10,
-                              mainAxisSpacing: 10,
-                              crossAxisCount: 2,
-                              childAspectRatio: 0.45,
-                              children: [
-                                ...List.generate(
-                                  context
-                                      .watch<BookViewModel>()
-                                      .allBooks
-                                      .length,
-                                  (index) {
-                                    BooksModel book = context
-                                        .watch<BookViewModel>()
-                                        .allBooks[index];
-                                    return BookItem(
-                                      linkPicture: book.imageUrl,
-                                      bookName: book.bookName,
-                                      author: book.author,
-                                      onTap: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) => DetailScreen(
-                                              booksModel: book,
-                                            ),
-                                          ),
-                                        );
-                                      },
-                                    );
-                                  },
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-        ));
+        ),
+      ),
+    );
   }
 }
+
