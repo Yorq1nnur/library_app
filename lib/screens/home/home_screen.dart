@@ -20,7 +20,8 @@ class HomeScreen extends StatefulWidget {
 
 class HomeScreenState extends State<HomeScreen> {
   String searchText = '';
-  String name='All';
+  String name = 'All';
+
   @override
   Widget build(BuildContext context) {
     return AnnotatedRegion(
@@ -55,9 +56,7 @@ class HomeScreenState extends State<HomeScreen> {
           ),
           actions: [
             IconButton(
-              onPressed: () {
-
-              },
+              onPressed: () {},
               icon: Icon(
                 Icons.add,
                 color: AppColors.c06070D,
@@ -74,7 +73,7 @@ class HomeScreenState extends State<HomeScreen> {
                     const Duration(seconds: 2),
                     () {
                       Provider.of<BookViewModel>(context, listen: false);
-                      context.read<BookViewModel>().getAllBooks();
+                      context.read<BookViewModel>().getCategoriesBook(name: name);
                     },
                   );
                 },
@@ -99,8 +98,10 @@ class HomeScreenState extends State<HomeScreen> {
                                 (index) => CategoryButton(
                                   title: categories[index],
                                   onTap: () {
-                                    name=categories[index];
-                                    context.read<BookViewModel>().getCategoriesBook(name:name);
+                                    name = categories[index];
+                                    context
+                                        .read<BookViewModel>()
+                                        .getCategoriesBook(name: name);
                                   },
                                 ),
                               ),
@@ -108,13 +109,18 @@ class HomeScreenState extends State<HomeScreen> {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 24.w, vertical: 10.h),
+                          padding: EdgeInsets.only(
+                            left: 24.w,
+                            right: 24.w,
+                            top: 10.h,
+                          ),
                           child: TextField(
                             onChanged: (value) {
-                              setState(() {
-                                searchText = value;
-                              });
+                              setState(
+                                () {
+                                  searchText = value;
+                                },
+                              );
                             },
                             decoration: const InputDecoration(
                               labelText: 'Search',
@@ -127,7 +133,7 @@ class HomeScreenState extends State<HomeScreen> {
                             primary: false,
                             padding: EdgeInsets.symmetric(
                               horizontal: 20.w,
-                              vertical: 40.h,
+                              vertical: 20.h,
                             ),
                             crossAxisSpacing: 10,
                             mainAxisSpacing: 10,
