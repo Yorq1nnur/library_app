@@ -59,7 +59,7 @@ class HomeScreenState extends State<HomeScreen> {
           title: Text(
             "My Library",
             style: AppTextStyle.interBold.copyWith(
-              color: AppColors.c06070D,
+              color: AppColors.black,
               fontSize: 24.sp,
             ),
           ),
