@@ -35,8 +35,16 @@ class HomeScreenState extends State<HomeScreen> {
         appBar: AppBar(
           centerTitle: true,
           backgroundColor: Colors.white,
-          leading: Padding(
-            padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 8.w),
+          leading: Container(
+            margin: EdgeInsets.symmetric(
+              horizontal: 10.w,
+              vertical: 10.h,
+            ),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(
+                16.r,
+              ),
+            ),
             child: ClipRRect(
                 borderRadius: BorderRadius.circular(
                   16.r,
