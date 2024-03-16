@@ -73,7 +73,9 @@ class HomeScreenState extends State<HomeScreen> {
                     const Duration(seconds: 2),
                     () {
                       Provider.of<BookViewModel>(context, listen: false);
-                      context.read<BookViewModel>().getCategoriesBook(name: name);
+                      context.read<BookViewModel>().getCategoriesBook(
+                            name: name,
+                          );
                     },
                   );
                 },
