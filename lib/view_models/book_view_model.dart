@@ -10,7 +10,6 @@ class BookViewModel extends ChangeNotifier {
 
   String statusText = "";
 
-  List<BooksModel> categoryBooks = [];
 
   bool isLoading = false;
 
@@ -69,6 +68,26 @@ class BookViewModel extends ChangeNotifier {
       statusText = myResponse.errorText;
     }
   }
+
+  Future<void> getCategoriesBook({required String name})async{
+    _notify(true);
+    MyResponse myResponse = await bookRepo.getAllBooks();
+    _notify(false);
+    if (myResponse.errorText.isEmpty) {
+      allBooks = myResponse.data as List<BooksModel>;
+    } else {
+      statusText = myResponse.errorText;
+    }
+    List<BooksModel> categoryBook = [];
+    if(name.isNotEmpty){
+      if(name!='All'){
+      categoryBook=allBooks.where((element) => element.categoryName==name).toList();
+     allBooks=categoryBook;}
+     // _notify(true);}
+      notifyListeners();
+    }
+  }
+
 
   _notify(bool value) {
     isLoading = value;

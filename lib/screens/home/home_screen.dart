@@ -20,7 +20,7 @@ class HomeScreen extends StatefulWidget {
 
 class HomeScreenState extends State<HomeScreen> {
   String searchText = '';
-
+  String name='All';
   @override
   Widget build(BuildContext context) {
     return AnnotatedRegion(
@@ -41,7 +41,9 @@ class HomeScreenState extends State<HomeScreen> {
           ),
           actions: [
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+
+              },
               icon: Icon(
                 Icons.add,
                 color: AppColors.c06070D,
@@ -57,6 +59,7 @@ class HomeScreenState extends State<HomeScreen> {
                   return Future<void>.delayed(
                     const Duration(seconds: 2),
                     () {
+                      Provider.of<BookViewModel>(context, listen: false);
                       context.read<BookViewModel>().getAllBooks();
                     },
                   );
@@ -81,7 +84,12 @@ class HomeScreenState extends State<HomeScreen> {
                                 categories.length,
                                 (index) => CategoryButton(
                                   title: categories[index],
-                                  onTap: () {},
+                                  onTap: () {
+                                    name=categories[index];
+                                    print(name);
+                                    context.read<BookViewModel>().getCategoriesBook(name:name);
+                                    print(context.watch<BookViewModel>().allBooks[0].categoryName);
+                                  },
                                 ),
                               ),
                             ],
