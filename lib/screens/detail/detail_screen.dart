@@ -22,7 +22,6 @@ class DetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    late bool update;
     return AnnotatedRegion(
       value: const SystemUiOverlayStyle(
         statusBarColor: AppColors.transparent,
@@ -47,7 +46,6 @@ class DetailScreen extends StatelessWidget {
                     IconButton(
                       onPressed: () {
                         Navigator.pop(context);
-                        print("=============$update================");
                       },
                       icon: Icon(
                         Icons.arrow_back,
@@ -67,7 +65,6 @@ class DetailScreen extends StatelessWidget {
                       children: [
                         IconButton(
                           onPressed: () {
-                            update = false;
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -76,11 +73,7 @@ class DetailScreen extends StatelessWidget {
                                 ),
                               ),
                             );
-                            update ? Navigator.pop(context) : null;
-                            print(
-                                "===============================$update=========");
                             isUpdated = false;
-                            update = false;
                           },
                           icon: Icon(
                             Icons.edit,

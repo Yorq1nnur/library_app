@@ -10,23 +10,56 @@ import 'package:zoom_tap_animation/zoom_tap_animation.dart';
 import '../../data/models/variables/variables.dart';
 import '../../view_models/book_view_model.dart';
 
-class UpdateScreen extends StatelessWidget {
+class UpdateScreen extends StatefulWidget {
   UpdateScreen({
     super.key,
     required this.booksModel,
   });
 
   final BooksModel booksModel;
+
+  @override
+  State<UpdateScreen> createState() => _UpdateScreenState();
+}
+
+class _UpdateScreenState extends State<UpdateScreen> {
   final TextEditingController bookNameController = TextEditingController();
+
   final TextEditingController categoryNameController = TextEditingController();
+
   final TextEditingController descriptionController = TextEditingController();
+
   final TextEditingController imageUrlController = TextEditingController();
+
   final TextEditingController priceController = TextEditingController();
+
   final TextEditingController rateController = TextEditingController();
+
   final TextEditingController authorController = TextEditingController();
+
+  List<dynamic> changeData = [
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+  ];
 
   @override
   Widget build(BuildContext context) {
+
+
+    List<String> oldBook = [
+      widget.booksModel.bookName,
+      widget.booksModel.author,
+      widget.booksModel.categoryName,
+      widget.booksModel.description,
+      widget.booksModel.imageUrl,
+      widget.booksModel.price.toString(),
+      widget.booksModel.rate.toString(),
+    ];
     final List<TextEditingController> controllers = [
       bookNameController,
       categoryNameController,
@@ -37,25 +70,7 @@ class UpdateScreen extends StatelessWidget {
       authorController,
     ];
 
-    List<String> oldBook = [
-      booksModel.bookName,
-      booksModel.author,
-      booksModel.categoryName,
-      booksModel.description,
-      booksModel.imageUrl,
-      booksModel.price.toString(),
-      booksModel.rate.toString(),
-    ];
 
-    List<dynamic> changeData = [
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-    ];
 
     return AnnotatedRegion(
       value: const SystemUiOverlayStyle(
@@ -95,19 +110,16 @@ class UpdateScreen extends StatelessWidget {
                               vertical: 10.h,
                             ),
                             child: TextField(
-                              controller: controllers[index],
+                              // controller: controllers[index],
                               textInputAction: index == 6 ? TextInputAction.done : TextInputAction.next,
                               readOnly: false,
                               enabled: true,
                               maxLines: 1,
                               onChanged: (value) {
-                                oldBook[index] = value;
-                                if (kDebugMode) {
-                                  print("Current: ${oldBook[index]}");
-                                }
+                                changeData[index] = value;
                               },
                               onSubmitted: (v){
-                                oldBook[index] = v;
+                                changeData[index] = v;
                                 if (kDebugMode) {
                                   print("Current: ${oldBook[index]}");
                                 }
@@ -147,10 +159,9 @@ class UpdateScreen extends StatelessWidget {
                         onTap: () async {
                           Future.delayed(const Duration(seconds: 3));
                           for (int i = 0; i < controllers.length; i++) {
-                            changeData[i] = controllers[i].text;
                             if (kDebugMode) {
                               print(
-                                  "==================================${oldBook[i]}\n");
+                                  "==================================${changeData[i]}\n");
                             }
                           }
                           BooksModel book = BooksModel(
@@ -161,7 +172,7 @@ class UpdateScreen extends StatelessWidget {
                             imageUrl: changeData[4],
                             price: int.parse(changeData[5]),
                             rate: double.parse(changeData[6]),
-                            uuid: booksModel.uuid,
+                            uuid: widget.booksModel.uuid,
                           );
                           await context.read<BookViewModel>().updateBook(book);
                           isUpdated == true;
@@ -182,6 +193,7 @@ class UpdateScreen extends StatelessWidget {
     );
   }
 
+  @override
   void dispose() {
     bookNameController.dispose();
     authorController.dispose();
@@ -190,5 +202,6 @@ class UpdateScreen extends StatelessWidget {
     imageUrlController.dispose();
     priceController.dispose();
     rateController.dispose();
+    super.dispose();
   }
 }
