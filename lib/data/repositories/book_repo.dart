@@ -12,6 +12,6 @@ class BookRepo {
   Future<MyResponse> deleteBook(String productUUID) =>
       ApiProvider.deleteBook(productUUID);
 
-  Future<MyResponse> updateBook(BooksModel productModel) =>
-      ApiProvider.updateBook(productModel);
+  Future<MyResponse> updateBook(BooksModel booksModel) =>
+      ApiProvider.updateBook(booksModel);
 }
