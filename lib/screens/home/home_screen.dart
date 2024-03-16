@@ -46,15 +46,16 @@ class HomeScreenState extends State<HomeScreen> {
               ),
             ),
             child: ClipRRect(
-                borderRadius: BorderRadius.circular(
-                  16.r,
-                ),
-                child: Image.asset(
-                  AppImages.library,
-                  height: 30.h,
-                  width: 30.h,
-                  fit: BoxFit.contain,
-                )),
+              borderRadius: BorderRadius.circular(
+                16.r,
+              ),
+              child: Image.asset(
+                AppImages.library,
+                height: 30.h,
+                width: 30.h,
+                fit: BoxFit.contain,
+              ),
+            ),
           ),
           title: Text(
             "My Library",
@@ -185,6 +186,9 @@ class HomeScreenState extends State<HomeScreen> {
                                           ),
                                         );
                                       },
+                                      categoryName: book.categoryName,
+                                      rate: book.rate.toString(),
+                                      price: book.price.toString(),
                                     ),
                                   ),
                             ],

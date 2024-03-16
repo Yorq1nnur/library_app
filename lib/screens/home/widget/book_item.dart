@@ -12,11 +12,17 @@ class BookItem extends StatelessWidget {
     required this.bookName,
     required this.author,
     required this.onTap,
+    required this.categoryName,
+    required this.rate,
+    required this.price,
   });
 
   final String linkPicture;
   final String bookName;
   final String author;
+  final String rate;
+  final String price;
+  final String categoryName;
   final VoidCallback onTap;
 
   @override
@@ -31,7 +37,7 @@ class BookItem extends StatelessWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(6.r),
               child: CachedNetworkImage(
-                imageUrl:linkPicture,
+                imageUrl: linkPicture,
                 height: 200.h,
                 width: 135.w,
                 fit: BoxFit.cover,
@@ -46,7 +52,7 @@ class BookItem extends StatelessWidget {
                 color: AppColors.c0F0F10,
                 fontSize: 16.sp,
               ),
-              maxLines: 2,
+              maxLines: 1,
               overflow: TextOverflow.ellipsis,
             ),
             SizedBox(
@@ -55,11 +61,73 @@ class BookItem extends StatelessWidget {
             Text(
               author,
               style: AppTextStyle.interMedium.copyWith(
-                color: AppColors.c9D9EA8,
+                color: AppColors.black.withOpacity(
+                  0.8,
+                ),
                 fontSize: 13.sp,
               ),
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
+            ),
+            SizedBox(
+              height: 6.h,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  categoryName,
+                  style: AppTextStyle.interMedium.copyWith(
+                    color: AppColors.black.withOpacity(
+                      0.5,
+                    ),
+                    fontSize: 13.sp,
+                  ),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                Text(
+                  rate,
+                  style: AppTextStyle.interMedium.copyWith(
+                    color: AppColors.black.withOpacity(
+                      0.5,
+                    ),
+                    fontSize: 13.sp,
+                  ),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 6.h,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "Narxi:",
+                  style: AppTextStyle.interMedium.copyWith(
+                    color: AppColors.black.withOpacity(
+                      0.5,
+                    ),
+                    fontSize: 13.sp,
+                  ),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                Text(
+                  "$price so'm",
+                  style: AppTextStyle.interMedium.copyWith(
+                    color: AppColors.black.withOpacity(
+                      0.5,
+                    ),
+                    fontSize: 13.sp,
+                  ),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ],
             ),
           ],
         ),
