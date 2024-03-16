@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:library_app/data/models/books_model.dart';
+import 'package:library_app/screens/update_screen/update_screen.dart';
 import 'package:library_app/utils/styles/app_text_style.dart';
 import 'package:library_app/view_models/book_view_model.dart';
 import 'package:provider/provider.dart';
@@ -19,7 +21,12 @@ class DetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return AnnotatedRegion(value: const SystemUiOverlayStyle(
+      statusBarColor: AppColors.transparent,
+      statusBarIconBrightness: Brightness.dark,
+      statusBarBrightness: Brightness.light,
+
+    ), child: Scaffold(
       body: Stack(
         children: [
           Image.asset(
@@ -53,7 +60,14 @@ class DetailScreen extends StatelessWidget {
                   Row(
                     children: [
                       IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>  UpdateScreen(booksModel: booksModel,),
+                            ),
+                          );
+                        },
                         icon: Icon(
                           Icons.edit,
                           color: AppColors.c06070D,
@@ -76,8 +90,8 @@ class DetailScreen extends StatelessWidget {
                                   TextButton(
                                     onPressed: () async {
                                       context.read<BookViewModel>().deleteBook(
-                                            bookUUID: booksModel.uuid,
-                                          );
+                                        bookUUID: booksModel.uuid!,
+                                      );
                                       Future.delayed(
                                         const Duration(seconds: 1),
                                       );
@@ -182,6 +196,6 @@ class DetailScreen extends StatelessWidget {
           )
         ],
       ),
-    );
+    ));
   }
 }

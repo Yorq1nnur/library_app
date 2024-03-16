@@ -60,7 +60,7 @@ class _GlobalScreenState extends State<GlobalScreen> {
                       context.watch<BookViewModel>().allBooks.length,
                       (index) {
                         imagesPath.addAll(
-                          context.watch<BookViewModel>().allBooks[index].images,
+                          context.watch<BookViewModel>().allBooks[index].images!,
                         );
                         BooksModel book =
                             context.watch<BookViewModel>().allBooks[index];

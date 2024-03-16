@@ -1,24 +1,24 @@
 class BooksModel {
-  final String uuid;
+  final String? uuid;
   final String bookName;
   final String author;
-  final int categoryId;
+  final int? categoryId;
   final String categoryName;
   final String description;
   final String imageUrl;
-  final List<String> images;
+  final List<String>? images;
   final int price;
   final double rate;
 
   BooksModel({
-    required this.uuid,
+     this.uuid,
     required this.bookName,
     required this.author,
-    required this.categoryId,
+     this.categoryId,
     required this.categoryName,
     required this.description,
     required this.imageUrl,
-    required this.images,
+    this.images,
     required this.price,
     required this.rate,
   });
