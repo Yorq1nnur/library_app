@@ -173,7 +173,7 @@ class _AddBookScreenState extends State<AddBookScreen> {
                             for (int i = 0; i < titles.length; i++) {
                               if (newBook[i].isEmpty) {
                                 isValid = false;
-                              }else{
+                              } else {
                                 isValid = true;
                               }
                               if (kDebugMode) {
@@ -183,34 +183,38 @@ class _AddBookScreenState extends State<AddBookScreen> {
                               }
                             }
 
-                               if(isValid == true){
-                                 BooksModel book = BooksModel(
-                                   bookName: newBook[0],
-                                   author: newBook[1],
-                                   categoryName: newBook[2],
-                                   description: newBook[3],
-                                   imageUrl: newBook[4],
-                                   price: int.parse(newBook[5]),
-                                   rate: double.parse(newBook[6]),
-                                 );
-                                 await context
-                                     .read<BookViewModel>()
-                                     .addBook(book);
-                               }else{
-                                 ScaffoldMessenger.of(context).showSnackBar(
-                                   const SnackBar(
-                                     content: Text(
-                                       "You didn't fill in some line!!!",
-                                     ),
-                                   ),
-                                 );
-                               }
+                            if (isValid == true) {
+                              BooksModel book = BooksModel(
+                                bookName: newBook[0],
+                                author: newBook[1],
+                                categoryName: newBook[2],
+                                description: newBook[3],
+                                imageUrl: newBook[4],
+                                price: int.parse(newBook[5]),
+                                rate: double.parse(newBook[6]),
+                              );
+                              await context.read<BookViewModel>().addBook(book);
+                            } else {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(
+                                    "You didn't fill in some line!!!",
+                                    style: AppTextStyle.interBold.copyWith(
+                                      color: Colors.red,
+                                    ),
+                                  ),
+                                ),
+                              );
+                            }
                             if (context.mounted) {
                               isValid ? Navigator.pop(context) : null;
                             }
                           },
-                          child: const Text(
+                          child: Text(
                             "SAQLASH",
+                            style: AppTextStyle.interBold.copyWith(
+                              color: Colors.blueGrey,
+                            ),
                           ),
                         ),
                       ],
