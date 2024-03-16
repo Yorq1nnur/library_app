@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:library_app/data/models/categories/categories.dart';
+import 'package:library_app/screens/add_book/add_book_screen.dart';
 import 'package:library_app/screens/detail/detail_screen.dart';
 import 'package:library_app/screens/home/widget/book_item.dart';
 import 'package:library_app/screens/home/widget/category_button.dart';
@@ -55,7 +56,14 @@ class HomeScreenState extends State<HomeScreen> {
           ),
           actions: [
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const AddBookScreen(),
+                  ),
+                );
+              },
               icon: Icon(
                 Icons.add,
                 color: AppColors.c06070D,
