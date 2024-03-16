@@ -209,6 +209,21 @@ class _AddBookScreenState extends State<AddBookScreen> {
                             if (context.mounted) {
                               isValid ? Navigator.pop(context) : null;
                             }
+                            if (context.mounted) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(
+                                    "SUCCESS",
+                                    style: AppTextStyle.interBold.copyWith(
+                                      color: Colors.lightBlue,
+                                      fontSize: 20.sp,
+                                      fontWeight: FontWeight.w700,
+                                    ),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
+                              );
+                            }
                           },
                           child: Container(
                             padding: EdgeInsets.symmetric(
