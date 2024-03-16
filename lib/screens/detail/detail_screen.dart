@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -37,184 +38,188 @@ class DetailScreen extends StatelessWidget {
               width: double.infinity,
               fit: BoxFit.cover,
             ),
-            Column(
-              children: [
-                SizedBox(height: 30.h),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    IconButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      icon: Icon(
-                        Icons.arrow_back,
-                        color: AppColors.c06070D,
-                        size: 24.w,
-                      ),
-                    ),
-                    Center(
-                      child: Text(
-                        "Detail Book",
-                        style: AppTextStyle.interMedium.copyWith(
-                          fontSize: 20.sp,
+            SingleChildScrollView(
+              scrollDirection: Axis.vertical,
+              physics: const BouncingScrollPhysics(),
+              child: Column(
+                children: [
+                  SizedBox(height: 30.h),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      IconButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        icon: Icon(
+                          Icons.arrow_back,
+                          color: AppColors.c06070D,
+                          size: 24.w,
                         ),
                       ),
-                    ),
-                    Row(
-                      children: [
-                        IconButton(
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => UpdateScreen(
-                                  booksModel: booksModel,
-                                ),
-                              ),
-                            );
-                            isUpdated = false;
-                          },
-                          icon: Icon(
-                            Icons.edit,
-                            color: AppColors.c06070D,
-                            size: 24.w,
+                      Center(
+                        child: Text(
+                          "Detail Book",
+                          style: AppTextStyle.interMedium.copyWith(
+                            fontSize: 20.sp,
                           ),
                         ),
-                        IconButton(
-                          onPressed: () async {
-                            showDialog(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return AlertDialog(
-                                  backgroundColor: AppColors.white,
-                                  title: const Text("Ishonchingiz komilmi?"),
-                                  titleTextStyle:
-                                      AppTextStyle.interBold.copyWith(
-                                    color: AppColors.black,
-                                    fontSize: 20.sp,
+                      ),
+                      Row(
+                        children: [
+                          IconButton(
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => UpdateScreen(
+                                    booksModel: booksModel,
                                   ),
-                                  actions: <Widget>[
-                                    TextButton(
-                                      onPressed: () async {
-                                        context
-                                            .read<BookViewModel>()
-                                            .deleteBook(
-                                              bookUUID: booksModel.uuid!,
-                                            );
-                                        Future.delayed(
-                                          const Duration(seconds: 1),
-                                        );
-                                        Navigator.pop(context);
-                                        ScaffoldMessenger.of(context)
-                                            .showSnackBar(
-                                          const SnackBar(
-                                            content: Text(
-                                              "SUCCESS",
+                                ),
+                              );
+                              isUpdated = false;
+                            },
+                            icon: Icon(
+                              Icons.edit,
+                              color: AppColors.c06070D,
+                              size: 24.w,
+                            ),
+                          ),
+                          IconButton(
+                            onPressed: () async {
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                    backgroundColor: AppColors.white,
+                                    title: const Text("Ishonchingiz komilmi?"),
+                                    titleTextStyle:
+                                        AppTextStyle.interBold.copyWith(
+                                      color: AppColors.black,
+                                      fontSize: 20.sp,
+                                    ),
+                                    actions: <Widget>[
+                                      TextButton(
+                                        onPressed: () async {
+                                          context
+                                              .read<BookViewModel>()
+                                              .deleteBook(
+                                                bookUUID: booksModel.uuid!,
+                                              );
+                                          Future.delayed(
+                                            const Duration(seconds: 1),
+                                          );
+                                          Navigator.pop(context);
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                            const SnackBar(
+                                              content: Text(
+                                                "SUCCESS",
+                                              ),
                                             ),
+                                          );
+                                          Navigator.pop(context);
+                                        },
+                                        child: Text(
+                                          'Yes',
+                                          style: AppTextStyle.interBold.copyWith(
+                                            color: AppColors.black,
                                           ),
-                                        );
-                                        Navigator.pop(context);
-                                      },
-                                      child: Text(
-                                        'Yes',
-                                        style: AppTextStyle.interBold.copyWith(
-                                          color: AppColors.black,
                                         ),
                                       ),
-                                    ),
-                                    TextButton(
-                                      onPressed: () {
-                                        Navigator.of(context).pop();
-                                      },
-                                      child: Text(
-                                        'No',
-                                        style: AppTextStyle.interBold
-                                            .copyWith(color: AppColors.black),
+                                      TextButton(
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                        child: Text(
+                                          'No',
+                                          style: AppTextStyle.interBold
+                                              .copyWith(color: AppColors.black),
+                                        ),
                                       ),
-                                    ),
-                                  ],
-                                );
-                              },
-                            );
-                          },
-                          icon: Icon(
-                            Icons.delete,
-                            color: AppColors.c06070D,
-                            size: 24.w,
+                                    ],
+                                  );
+                                },
+                              );
+                            },
+                            icon: Icon(
+                              Icons.delete,
+                              color: AppColors.c06070D,
+                              size: 24.w,
+                            ),
                           ),
-                        ),
-                      ],
-                    )
-                  ],
-                ),
-                SizedBox(height: 20.h),
-                Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 20.w,
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        height: 360.h,
-                        child: Stack(
-                          children: [
-                            Align(
-                              alignment: Alignment.bottomCenter,
-                              child: SvgPicture.asset(
-                                AppImages.shelf,
-                              ),
-                            ),
-                            Center(
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(6.r),
-                                child: Image.network(
-                                  booksModel.imageUrl,
-                                  height: 300.h,
-                                  width: 200.w,
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(
-                        height: 18.h,
-                      ),
-                      Text(
-                        booksModel.bookName,
-                        style: AppTextStyle.interSemiBold.copyWith(
-                          color: AppColors.c0F0F10,
-                          fontSize: 16.sp,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                      SizedBox(
-                        height: 6.h,
-                      ),
-                      Text(
-                        booksModel.author,
-                        style: AppTextStyle.interMedium.copyWith(
-                          color: AppColors.c9D9EA8,
-                          fontSize: 13.sp,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                      SizedBox(
-                        height: 20.h,
-                      ),
-                      SizedBox(
-                        child: Text(
-                          booksModel.description,
-                          textAlign: TextAlign.center,
-                        ),
+                        ],
                       )
                     ],
                   ),
-                ),
-              ],
+                  SizedBox(height: 20.h),
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 20.w,
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          height: 360.h,
+                          child: Stack(
+                            children: [
+                              Align(
+                                alignment: Alignment.bottomCenter,
+                                child: SvgPicture.asset(
+                                  AppImages.shelf,
+                                ),
+                              ),
+                              Center(
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(6.r),
+                                  child: Image.network(
+                                    booksModel.imageUrl,
+                                    height: 300.h,
+                                    width: 200.w,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          height: 18.h,
+                        ),
+                        Text(
+                          booksModel.bookName,
+                          style: AppTextStyle.interSemiBold.copyWith(
+                            color: AppColors.c0F0F10,
+                            fontSize: 16.sp,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                        SizedBox(
+                          height: 6.h,
+                        ),
+                        Text(
+                          booksModel.author,
+                          style: AppTextStyle.interMedium.copyWith(
+                            color: AppColors.c9D9EA8,
+                            fontSize: 13.sp,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                        SizedBox(
+                          height: 20.h,
+                        ),
+                        SizedBox(
+                          child: Text(
+                            booksModel.description,
+                            textAlign: TextAlign.center,
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             )
           ],
         ),
