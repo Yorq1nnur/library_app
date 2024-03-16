@@ -15,9 +15,7 @@ class CategoryButton extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 8.w),
       child: TextButton(
-        onPressed: () {
-          onTap;
-        },
+        onPressed:onTap,
         style: TextButton.styleFrom(
           padding: EdgeInsets.symmetric(vertical: 0, horizontal: 20.w),
           backgroundColor: AppColors.c06070D,
