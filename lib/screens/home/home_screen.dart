@@ -42,8 +42,8 @@ class HomeScreenState extends State<HomeScreen> {
                 ),
                 child: Image.asset(
                   AppImages.library,
-                  height: 50.h,
-                  width: 50.h,
+                  height: 30.h,
+                  width: 30.h,
                   fit: BoxFit.contain,
                 )),
           ),
@@ -129,7 +129,7 @@ class HomeScreenState extends State<HomeScreen> {
                             primary: false,
                             padding: EdgeInsets.symmetric(
                               horizontal: 20.w,
-                              vertical: 40.h,
+                              vertical: 20.h,
                             ),
                             crossAxisSpacing: 10,
                             mainAxisSpacing: 10,
