@@ -3,34 +3,41 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:library_app/data/models/books_model.dart';
 import 'package:library_app/utils/colors/app_colors.dart';
 
-class TextFieldItem extends StatelessWidget {
+class TextFieldItem extends StatefulWidget {
   const TextFieldItem({
     super.key,
     required this.labelText,
     required this.hintText,
     required this.controller,
     required this.booksModel,
+    required this.index,
   });
 
   final String labelText;
   final String hintText;
   final TextEditingController controller;
   final BooksModel booksModel;
+  final int index;
 
   @override
-  Widget build(BuildContext context) {
-    String change = "";
+  State<TextFieldItem> createState() => _TextFieldItemState();
+}
 
+class _TextFieldItemState extends State<TextFieldItem> {
+  @override
+  Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(
         vertical: 10.h,
       ),
       child: TextField(
-        focusNode: FocusNode(),
-        controller: controller,
+        onTapAlwaysCalled: true,
+        textInputAction: TextInputAction.next,
+        controller: widget.controller,
+        enabled: true,
         decoration: InputDecoration(
-          hintText: hintText,
-          labelText: labelText,
+          hintText: widget.hintText,
+          labelText: widget.labelText,
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(
               16.r,
@@ -43,5 +50,11 @@ class TextFieldItem extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    widget.controller.dispose();
   }
 }
