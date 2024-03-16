@@ -23,21 +23,7 @@ class UpdateScreen extends StatefulWidget {
 }
 
 class _UpdateScreenState extends State<UpdateScreen> {
-  final TextEditingController bookNameController = TextEditingController();
-
-  final TextEditingController categoryNameController = TextEditingController();
-
-  final TextEditingController descriptionController = TextEditingController();
-
-  final TextEditingController imageUrlController = TextEditingController();
-
-  final TextEditingController priceController = TextEditingController();
-
-  final TextEditingController rateController = TextEditingController();
-
-  final TextEditingController authorController = TextEditingController();
-
-  List<dynamic> changeData = [
+  List<String> changeData = [
     "",
     "",
     "",
@@ -57,15 +43,6 @@ class _UpdateScreenState extends State<UpdateScreen> {
       widget.booksModel.imageUrl,
       widget.booksModel.price.toString(),
       widget.booksModel.rate.toString(),
-    ];
-    final List<TextEditingController> controllers = [
-      bookNameController,
-      categoryNameController,
-      descriptionController,
-      imageUrlController,
-      priceController,
-      rateController,
-      authorController,
     ];
 
     return AnnotatedRegion(
@@ -99,7 +76,7 @@ class _UpdateScreenState extends State<UpdateScreen> {
                   child: Column(
                     children: [
                       ...List.generate(
-                        controllers.length,
+                        oldBook.length,
                         (index) {
                           return Padding(
                             padding: EdgeInsets.symmetric(
@@ -156,7 +133,7 @@ class _UpdateScreenState extends State<UpdateScreen> {
                       ZoomTapAnimation(
                         onTap: () async {
                           Future.delayed(const Duration(seconds: 3));
-                          for (int i = 0; i < controllers.length; i++) {
+                          for (int i = 0; i < oldBook.length; i++) {
                             if (kDebugMode) {
                               print(
                                 "==================================${changeData[i]}\n",
@@ -190,17 +167,5 @@ class _UpdateScreenState extends State<UpdateScreen> {
         ),
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    bookNameController.dispose();
-    authorController.dispose();
-    categoryNameController.dispose();
-    descriptionController.dispose();
-    imageUrlController.dispose();
-    priceController.dispose();
-    rateController.dispose();
-    super.dispose();
   }
 }
