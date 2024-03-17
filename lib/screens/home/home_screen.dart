@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -83,7 +84,9 @@ class HomeScreenState extends State<HomeScreen> {
           ],
         ),
         body: context.watch<BookViewModel>().isLoading
-            ? const Center(child: CircularProgressIndicator())
+            ? const Center(
+                child: CircularProgressIndicator(),
+              )
             : RefreshIndicator(
                 onRefresh: () {
                   return Future<void>.delayed(
@@ -91,7 +94,10 @@ class HomeScreenState extends State<HomeScreen> {
                       seconds: 2,
                     ),
                     () {
-                      Provider.of<BookViewModel>(context, listen: false);
+                      Provider.of<BookViewModel>(
+                        context,
+                        listen: false,
+                      );
                       context.read<BookViewModel>().getCategoriesBook(
                             name: name,
                           );
@@ -144,9 +150,33 @@ class HomeScreenState extends State<HomeScreen> {
                                 },
                               );
                             },
-                            decoration: const InputDecoration(
+                            decoration: InputDecoration(
+                              enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(
+                                    20.r,
+                                  ),
+                                  borderSide: BorderSide(
+                                      color: Colors.amberAccent,
+                                      width: 1.w
+                                  )
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20.r,),
+                                borderSide: BorderSide(
+                                  color: Colors.blueGrey,
+                                  width: 1.w,
+                                )
+                              ),
                               labelText: 'Search',
-                              border: OutlineInputBorder(),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(
+                                  20.r,
+                                ),
+                                borderSide: BorderSide(
+                                  color: Colors.red,
+                                  width: 1.w
+                                )
+                              ),
                             ),
                           ),
                         ),
