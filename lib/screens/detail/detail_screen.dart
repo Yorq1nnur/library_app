@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -175,8 +176,8 @@ class DetailScreen extends StatelessWidget {
                               Center(
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(6.r),
-                                  child: Image.network(
-                                    booksModel.imageUrl,
+                                  child: CachedNetworkImage(
+                                    imageUrl: booksModel.imageUrl,
                                     height: 300.h,
                                     width: 200.w,
                                     fit: BoxFit.cover,
