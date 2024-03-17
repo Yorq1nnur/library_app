@@ -156,26 +156,29 @@ class HomeScreenState extends State<HomeScreen> {
                                     20.r,
                                   ),
                                   borderSide: BorderSide(
-                                      color: Colors.amberAccent,
-                                      width: 1.w
-                                  )
-                              ),
+                                      color: Colors.amberAccent, width: 1.w)),
                               focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(20.r,),
+                                borderRadius: BorderRadius.circular(
+                                  20.r,
+                                ),
                                 borderSide: BorderSide(
                                   color: Colors.blueGrey,
                                   width: 1.w,
-                                )
+                                ),
                               ),
                               labelText: 'Search',
+                              labelStyle: AppTextStyle.interBold.copyWith(
+                                color: AppColors.black,
+                                fontSize: 20.sp,
+                              ),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(
                                   20.r,
                                 ),
                                 borderSide: BorderSide(
                                   color: Colors.red,
-                                  width: 1.w
-                                )
+                                  width: 1.w,
+                                ),
                               ),
                             ),
                           ),

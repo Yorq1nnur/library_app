@@ -86,16 +86,29 @@ class BookItem extends StatelessWidget {
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),
-                Text(
-                  rate,
-                  style: AppTextStyle.interMedium.copyWith(
-                    color: AppColors.black.withOpacity(
-                      0.5,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Text(
+                      rate,
+                      style: AppTextStyle.interMedium.copyWith(
+                        color: AppColors.black.withOpacity(
+                          0.5,
+                        ),
+                        fontSize: 13.sp,
+                      ),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
                     ),
-                    fontSize: 13.sp,
-                  ),
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
+                    SizedBox(
+                      width: 10.w,
+                    ),
+                    Icon(
+                      Icons.star,
+                      size: 20.w,
+                      color: Colors.yellowAccent,
+                    ),
+                  ],
                 ),
               ],
             ),
