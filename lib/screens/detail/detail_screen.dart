@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -8,7 +7,6 @@ import 'package:library_app/screens/update_screen/update_screen.dart';
 import 'package:library_app/utils/styles/app_text_style.dart';
 import 'package:library_app/view_models/book_view_model.dart';
 import 'package:provider/provider.dart';
-
 import '../../data/models/variables/variables.dart';
 import '../../utils/colors/app_colors.dart';
 import '../../utils/images/app_images.dart';
@@ -69,7 +67,7 @@ class DetailScreen extends StatelessWidget {
                         children: [
                           IconButton(
                             onPressed: () {
-                              Navigator.push(
+                              Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => UpdateScreen(
