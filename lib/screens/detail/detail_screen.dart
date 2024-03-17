@@ -79,7 +79,7 @@ class DetailScreen extends StatelessWidget {
                             },
                             icon: Icon(
                               Icons.edit,
-                              color: AppColors.c06070D,
+                              color: Colors.blue,
                               size: 24.w,
                             ),
                           ),
@@ -143,7 +143,7 @@ class DetailScreen extends StatelessWidget {
                             },
                             icon: Icon(
                               Icons.delete,
-                              color: AppColors.c06070D,
+                              color: Colors.red,
                               size: 24.w,
                             ),
                           ),
@@ -246,7 +246,9 @@ class DetailScreen extends StatelessWidget {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 50.w,),
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 50.w,
+                          ),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -282,9 +284,13 @@ class DetailScreen extends StatelessWidget {
                             ],
                           ),
                         ),
-                        SizedBox(height: 6.h,),
+                        SizedBox(
+                          height: 6.h,
+                        ),
                         Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 50.w,),
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 50.w,
+                          ),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -307,8 +313,6 @@ class DetailScreen extends StatelessWidget {
                             ],
                           ),
                         ),
-
-
                       ],
                     ),
                   ),
