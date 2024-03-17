@@ -120,7 +120,8 @@ class DetailScreen extends StatelessWidget {
                                         },
                                         child: Text(
                                           'Yes',
-                                          style: AppTextStyle.interBold.copyWith(
+                                          style:
+                                              AppTextStyle.interBold.copyWith(
                                             color: AppColors.black,
                                           ),
                                         ),
@@ -150,13 +151,16 @@ class DetailScreen extends StatelessWidget {
                       )
                     ],
                   ),
-                  SizedBox(height: 20.h),
+                  SizedBox(
+                    height: 20.h,
+                  ),
                   Padding(
                     padding: EdgeInsets.symmetric(
-                      horizontal: 20.w,
+                      horizontal: 10.w,
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         SizedBox(
                           height: 360.h,
@@ -186,15 +190,33 @@ class DetailScreen extends StatelessWidget {
                           height: 18.h,
                         ),
                         Text(
-                          booksModel.bookName,
+                          "Kitob nomi:",
                           style: AppTextStyle.interSemiBold.copyWith(
                             color: AppColors.c0F0F10,
                             fontSize: 16.sp,
                           ),
                           textAlign: TextAlign.center,
                         ),
+                        Text(
+                          booksModel.bookName,
+                          style: AppTextStyle.interSemiBold.copyWith(
+                            color: AppColors.c0F0F10.withOpacity(
+                              0.5,
+                            ),
+                            fontSize: 16.sp,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
                         SizedBox(
                           height: 6.h,
+                        ),
+                        Text(
+                          "Kitob muallifi:",
+                          style: AppTextStyle.interSemiBold.copyWith(
+                            color: AppColors.c0F0F10,
+                            fontSize: 16.sp,
+                          ),
+                          textAlign: TextAlign.center,
                         ),
                         Text(
                           booksModel.author,
@@ -205,14 +227,88 @@ class DetailScreen extends StatelessWidget {
                           textAlign: TextAlign.center,
                         ),
                         SizedBox(
-                          height: 20.h,
+                          height: 10.h,
                         ),
-                        SizedBox(
-                          child: Text(
-                            booksModel.description,
-                            textAlign: TextAlign.center,
+                        Text(
+                          "Izoh:",
+                          style: AppTextStyle.interSemiBold.copyWith(
+                            color: AppColors.c0F0F10,
+                            fontSize: 16.sp,
                           ),
-                        )
+                          textAlign: TextAlign.center,
+                        ),
+                        Text(
+                          booksModel.description,
+                          textAlign: TextAlign.center,
+                          style: AppTextStyle.interMedium.copyWith(
+                            color: AppColors.c9D9EA8,
+                            fontSize: 13.sp,
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 50.w,),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                "Kitob reytingi:",
+                                style: AppTextStyle.interSemiBold.copyWith(
+                                  color: AppColors.c0F0F10,
+                                  fontSize: 16.sp,
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    booksModel.rate.toString(),
+                                    textAlign: TextAlign.center,
+                                    style: AppTextStyle.interMedium.copyWith(
+                                      color: AppColors.c9D9EA8,
+                                      fontSize: 13.sp,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 10.w,
+                                  ),
+                                  Icon(
+                                    Icons.star,
+                                    size: 20.w,
+                                    color: Colors.yellowAccent,
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(height: 6.h,),
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 50.w,),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                "Kitob narxi:",
+                                style: AppTextStyle.interSemiBold.copyWith(
+                                  color: AppColors.c0F0F10,
+                                  fontSize: 16.sp,
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
+                              Text(
+                                "${booksModel.price} so'm",
+                                textAlign: TextAlign.center,
+                                style: AppTextStyle.interMedium.copyWith(
+                                  color: AppColors.c9D9EA8,
+                                  fontSize: 13.sp,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+
+
                       ],
                     ),
                   ),
