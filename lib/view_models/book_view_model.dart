@@ -24,7 +24,7 @@ class BookViewModel extends ChangeNotifier {
     _notify(false);
     if (myResponse.errorText.isEmpty) {
       allBooks = myResponse.data as List<BooksModel>;
-      categoryBook=allBooks;
+      categoryBook = allBooks;
     } else {
       statusText = myResponse.errorText;
     }
@@ -70,15 +70,12 @@ class BookViewModel extends ChangeNotifier {
   }
 
   Future<void> getCategoriesBook({required String name}) async {
-
-
     if (name.isNotEmpty) {
       if (name != 'All') {
         categoryBook =
             allBooks.where((element) => element.categoryName == name).toList();
-
-      }else {
-        categoryBook=allBooks;
+      } else {
+        categoryBook = allBooks;
       }
       notifyListeners();
     }
