@@ -5,7 +5,11 @@ import '../../../utils/colors/app_colors.dart';
 import '../../../utils/styles/app_text_style.dart';
 
 class CategoryButton extends StatelessWidget {
-  const CategoryButton({super.key, required this.title, required this.onTap, required this.isActive});
+  const CategoryButton(
+      {super.key,
+      required this.title,
+      required this.onTap,
+      required this.isActive});
 
   final String title;
   final VoidCallback onTap;
@@ -14,19 +18,27 @@ class CategoryButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 8.w),
+      padding: EdgeInsets.symmetric(
+        horizontal: 8.w,
+      ),
       child: TextButton(
-        onPressed:onTap,
+        onPressed: onTap,
         style: TextButton.styleFrom(
-          padding: EdgeInsets.symmetric(vertical: 0, horizontal: 20.w),
-          backgroundColor: isActive? AppColors.c06070D:Colors.grey,
+          padding: EdgeInsets.symmetric(
+            horizontal: 20.w,
+          ),
+          backgroundColor: isActive ? AppColors.c06070D : Colors.grey,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(15.r),
+            borderRadius: BorderRadius.circular(
+              15.r,
+            ),
           ),
         ),
         child: Text(
           title,
-          style: AppTextStyle.interSemiBold.copyWith(color: AppColors.cDBDBDE),
+          style: AppTextStyle.interSemiBold.copyWith(
+            color: isActive ? AppColors.white : Colors.black,
+          ),
         ),
       ),
     );

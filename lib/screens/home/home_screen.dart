@@ -28,15 +28,19 @@ class HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return AnnotatedRegion(
       value: const SystemUiOverlayStyle(
-          statusBarColor: AppColors.transparent,
-          statusBarIconBrightness: Brightness.dark,
-          statusBarBrightness: Brightness.light),
+        statusBarColor: AppColors.transparent,
+        statusBarIconBrightness: Brightness.dark,
+        statusBarBrightness: Brightness.light,
+      ),
       child: Scaffold(
         appBar: AppBar(
           centerTitle: true,
           backgroundColor: Colors.white,
           leading: Container(
-            margin: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
+            margin: EdgeInsets.symmetric(
+              horizontal: 10.w,
+              vertical: 10.h,
+            ),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(
                 16.r,
@@ -46,8 +50,12 @@ class HomeScreenState extends State<HomeScreen> {
               borderRadius: BorderRadius.circular(
                 16.r,
               ),
-              child: Image.asset(AppImages.library,
-                  height: 30.h, width: 30.h, fit: BoxFit.contain),
+              child: Image.asset(
+                AppImages.library,
+                height: 30.h,
+                width: 30.h,
+                fit: BoxFit.contain,
+              ),
             ),
           ),
           title: Text(
@@ -59,11 +67,17 @@ class HomeScreenState extends State<HomeScreen> {
             IconButton(
               onPressed: () {
                 Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const AddBookScreen()));
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const AddBookScreen(),
+                  ),
+                );
               },
-              icon: Icon(Icons.add, color: AppColors.c06070D, size: 24.w),
+              icon: Icon(
+                Icons.add,
+                color: AppColors.c06070D,
+                size: 24.w,
+              ),
             ),
           ],
         ),
