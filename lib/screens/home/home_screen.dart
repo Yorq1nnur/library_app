@@ -98,32 +98,33 @@ class HomeScreenState extends State<HomeScreen> {
                         SingleChildScrollView(
                           physics: const BouncingScrollPhysics(),
                           scrollDirection: Axis.horizontal,
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 0.w),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                ...List.generate(categories.length, (index) {
-                                  return CategoryButton(
-                                    isActive: activeIndex == index,
-                                    title: categories[index],
-                                    onTap: () {
-                                      activeIndex = index;
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              ...List.generate(categories.length, (index) {
+                                return CategoryButton(
+                                  isActive: activeIndex == index,
+                                  title: categories[index],
+                                  onTap: () {
+                                    activeIndex = index;
 
-                                      name = categories[index];
-                                      context
-                                          .read<BookViewModel>()
-                                          .getCategoriesBook(name: name);
-                                    },
-                                  );
-                                }),
-                              ],
-                            ),
+                                    name = categories[index];
+                                    context
+                                        .read<BookViewModel>()
+                                        .getCategoriesBook(name: name);
+                                  },
+                                );
+                              }),
+                            ],
                           ),
                         ),
                         Padding(
                           padding: EdgeInsets.only(
-                              left: 24.w, right: 24.w, top: 10.h, bottom: 5.h),
+                            left: 24.w,
+                            right: 24.w,
+                            top: 10.h,
+                            bottom: 5.h,
+                          ),
                           child: TextField(
                             onChanged: (value) {
                               setState(
