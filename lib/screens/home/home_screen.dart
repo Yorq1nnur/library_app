@@ -115,19 +115,24 @@ class HomeScreenState extends State<HomeScreen> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              ...List.generate(categories.length, (index) {
-                                return CategoryButton(
-                                  isActive: activeIndex == index,
-                                  title: categories[index],
-                                  onTap: () {
-                                    activeIndex = index;
-                                    name = categories[index];
-                                    context
-                                        .read<BookViewModel>()
-                                        .getCategoriesBook(name: name);
-                                  },
-                                );
-                              }),
+                              ...List.generate(
+                                categories.length,
+                                (index) {
+                                  return CategoryButton(
+                                    isActive: activeIndex == index,
+                                    title: categories[index],
+                                    onTap: () {
+                                      activeIndex = index;
+                                      name = categories[index];
+                                      context
+                                          .read<BookViewModel>()
+                                          .getCategoriesBook(
+                                            name: name,
+                                          );
+                                    },
+                                  );
+                                },
+                              ),
                             ],
                           ),
                         ),
@@ -148,25 +153,36 @@ class HomeScreenState extends State<HomeScreen> {
                             },
                             decoration: InputDecoration(
                               enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(
-                                    20.r,
-                                  ),
-                                  borderSide: BorderSide(
-                                      color: Colors.amberAccent, width: 1.w)),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(20.r),
+                                borderRadius: BorderRadius.circular(
+                                  20.r,
+                                ),
                                 borderSide: BorderSide(
-                                    color: Colors.blueGrey, width: 1.w),
+                                  color: Colors.amberAccent,
+                                  width: 1.w,
+                                ),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(
+                                  20.r,
+                                ),
+                                borderSide: BorderSide(
+                                  color: Colors.blueGrey,
+                                  width: 1.w,
+                                ),
                               ),
                               labelText: 'Search',
                               labelStyle: AppTextStyle.interBold.copyWith(
-                                  color: AppColors.black, fontSize: 20.sp),
+                                color: AppColors.black,
+                                fontSize: 20.sp,
+                              ),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(
                                   20.r,
                                 ),
-                                borderSide:
-                                    BorderSide(color: Colors.red, width: 1.w),
+                                borderSide: BorderSide(
+                                  color: Colors.red,
+                                  width: 1.w,
+                                ),
                               ),
                             ),
                           ),
