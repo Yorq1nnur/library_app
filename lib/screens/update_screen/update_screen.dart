@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:library_app/data/models/books_model.dart';
+import 'package:library_app/screens/home/home_screen.dart';
 import 'package:library_app/utils/colors/app_colors.dart';
 import 'package:library_app/utils/styles/app_text_style.dart';
 import 'package:provider/provider.dart';
@@ -83,6 +84,7 @@ class _UpdateScreenState extends State<UpdateScreen> {
                               vertical: 10.h,
                             ),
                             child: TextField(
+                              style: AppTextStyle.interMedium,
                               // controller: controllers[index],
                               textInputAction: index == 6
                                   ? TextInputAction.done
@@ -182,7 +184,9 @@ class _UpdateScreenState extends State<UpdateScreen> {
                           }
                           isUpdated == true;
                           if (context.mounted) {
-                            Navigator.pop(context);
+                            Navigator.push(context,MaterialPageRoute(builder: (context){
+                              return const HomeScreen();
+                            }));
                           }
                         },
                         child: Container(

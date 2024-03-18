@@ -22,7 +22,7 @@ class HomeScreen extends StatefulWidget {
 class HomeScreenState extends State<HomeScreen> {
   String searchText = '';
   String name = 'All';
-
+  int activeIndex=0;
   @override
   Widget build(BuildContext context) {
     return AnnotatedRegion(
@@ -118,11 +118,13 @@ class HomeScreenState extends State<HomeScreen> {
                                 (index) => CategoryButton(
                                   title: categories[index],
                                   onTap: () {
+                                    activeIndex=index;
+                                    // setState(() {});
                                     name = categories[index];
                                     context
                                         .read<BookViewModel>()
                                         .getCategoriesBook(name: name);
-                                  },
+                                  }, isActive:activeIndex==index,
                                 ),
                               ),
                             ],
@@ -163,7 +165,7 @@ class HomeScreenState extends State<HomeScreen> {
                             children: [
                               ...context
                                   .watch<BookViewModel>()
-                                  .allBooks
+                                  .categoryBook
                                   .where(
                                     (book) =>
                                         book.bookName.toLowerCase().contains(
