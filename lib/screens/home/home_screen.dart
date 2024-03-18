@@ -181,23 +181,23 @@ class HomeScreenState extends State<HomeScreen> {
                                   )
                                   .map(
                                     (book) => BookItem(
-                                        linkPicture: book.imageUrl,
-                                        bookName: book.bookName,
-                                        author: book.author,
-                                        onTap: () {
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  DetailScreen(
-                                                booksModel: book,
-                                              ),
+                                      linkPicture: book.imageUrl,
+                                      bookName: book.bookName,
+                                      author: book.author,
+                                      onTap: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => DetailScreen(
+                                              booksModel: book,
                                             ),
-                                          );
-                                        },
-                                        categoryName: book.categoryName,
-                                        rate: book.rate.toString(),
-                                        price: book.price.toString()),
+                                          ),
+                                        );
+                                      },
+                                      categoryName: book.categoryName,
+                                      rate: book.rate.toString(),
+                                      price: book.price.toString(),
+                                    ),
                                   ),
                             ],
                           ),
