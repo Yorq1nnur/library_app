@@ -121,7 +121,6 @@ class HomeScreenState extends State<HomeScreen> {
                                   title: categories[index],
                                   onTap: () {
                                     activeIndex = index;
-
                                     name = categories[index];
                                     context
                                         .read<BookViewModel>()
