@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -23,24 +22,21 @@ class HomeScreen extends StatefulWidget {
 class HomeScreenState extends State<HomeScreen> {
   String searchText = '';
   String name = 'All';
+  int activeIndex = 0;
 
   @override
   Widget build(BuildContext context) {
     return AnnotatedRegion(
       value: const SystemUiOverlayStyle(
-        statusBarColor: AppColors.transparent,
-        statusBarIconBrightness: Brightness.dark,
-        statusBarBrightness: Brightness.light,
-      ),
+          statusBarColor: AppColors.transparent,
+          statusBarIconBrightness: Brightness.dark,
+          statusBarBrightness: Brightness.light),
       child: Scaffold(
         appBar: AppBar(
           centerTitle: true,
           backgroundColor: Colors.white,
           leading: Container(
-            margin: EdgeInsets.symmetric(
-              horizontal: 10.w,
-              vertical: 10.h,
-            ),
+            margin: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(
                 16.r,
@@ -50,36 +46,24 @@ class HomeScreenState extends State<HomeScreen> {
               borderRadius: BorderRadius.circular(
                 16.r,
               ),
-              child: Image.asset(
-                AppImages.library,
-                height: 30.h,
-                width: 30.h,
-                fit: BoxFit.contain,
-              ),
+              child: Image.asset(AppImages.library,
+                  height: 30.h, width: 30.h, fit: BoxFit.contain),
             ),
           ),
           title: Text(
             "My Library",
-            style: AppTextStyle.interBold.copyWith(
-              color: AppColors.black,
-              fontSize: 24.sp,
-            ),
+            style: AppTextStyle.interBold
+                .copyWith(color: AppColors.black, fontSize: 24.sp),
           ),
           actions: [
             IconButton(
               onPressed: () {
                 Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const AddBookScreen(),
-                  ),
-                );
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const AddBookScreen()));
               },
-              icon: Icon(
-                Icons.add,
-                color: AppColors.c06070D,
-                size: 24.w,
-              ),
+              icon: Icon(Icons.add, color: AppColors.c06070D, size: 24.w),
             ),
           ],
         ),
@@ -94,13 +78,10 @@ class HomeScreenState extends State<HomeScreen> {
                       seconds: 2,
                     ),
                     () {
-                      Provider.of<BookViewModel>(
-                        context,
-                        listen: false,
-                      );
-                      context.read<BookViewModel>().getCategoriesBook(
-                            name: name,
-                          );
+                      Provider.of<BookViewModel>(context, listen: false);
+                      context
+                          .read<BookViewModel>()
+                          .getCategoriesBook(name: name);
                     },
                   );
                 },
@@ -117,31 +98,32 @@ class HomeScreenState extends State<HomeScreen> {
                         SingleChildScrollView(
                           physics: const BouncingScrollPhysics(),
                           scrollDirection: Axis.horizontal,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              ...List.generate(
-                                categories.length,
-                                (index) => CategoryButton(
-                                  title: categories[index],
-                                  onTap: () {
-                                    name = categories[index];
-                                    context
-                                        .read<BookViewModel>()
-                                        .getCategoriesBook(name: name);
-                                  },
-                                ),
-                              ),
-                            ],
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 0.w),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                ...List.generate(categories.length, (index) {
+                                  return CategoryButton(
+                                    isActive: activeIndex == index,
+                                    title: categories[index],
+                                    onTap: () {
+                                      activeIndex = index;
+
+                                      name = categories[index];
+                                      context
+                                          .read<BookViewModel>()
+                                          .getCategoriesBook(name: name);
+                                    },
+                                  );
+                                }),
+                              ],
+                            ),
                           ),
                         ),
                         Padding(
                           padding: EdgeInsets.only(
-                            left: 24.w,
-                            right: 24.w,
-                            top: 10.h,
-                            bottom: 5.h,
-                          ),
+                              left: 24.w, right: 24.w, top: 10.h, bottom: 5.h),
                           child: TextField(
                             onChanged: (value) {
                               setState(
@@ -158,27 +140,19 @@ class HomeScreenState extends State<HomeScreen> {
                                   borderSide: BorderSide(
                                       color: Colors.amberAccent, width: 1.w)),
                               focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(
-                                  20.r,
-                                ),
+                                borderRadius: BorderRadius.circular(20.r),
                                 borderSide: BorderSide(
-                                  color: Colors.blueGrey,
-                                  width: 1.w,
-                                ),
+                                    color: Colors.blueGrey, width: 1.w),
                               ),
                               labelText: 'Search',
                               labelStyle: AppTextStyle.interBold.copyWith(
-                                color: AppColors.black,
-                                fontSize: 20.sp,
-                              ),
+                                  color: AppColors.black, fontSize: 20.sp),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(
                                   20.r,
                                 ),
-                                borderSide: BorderSide(
-                                  color: Colors.red,
-                                  width: 1.w,
-                                ),
+                                borderSide:
+                                    BorderSide(color: Colors.red, width: 1.w),
                               ),
                             ),
                           ),
@@ -197,7 +171,7 @@ class HomeScreenState extends State<HomeScreen> {
                             children: [
                               ...context
                                   .watch<BookViewModel>()
-                                  .allBooks
+                                  .categoryBook
                                   .where(
                                     (book) =>
                                         book.bookName.toLowerCase().contains(
@@ -206,23 +180,23 @@ class HomeScreenState extends State<HomeScreen> {
                                   )
                                   .map(
                                     (book) => BookItem(
-                                      linkPicture: book.imageUrl,
-                                      bookName: book.bookName,
-                                      author: book.author,
-                                      onTap: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) => DetailScreen(
-                                              booksModel: book,
+                                        linkPicture: book.imageUrl,
+                                        bookName: book.bookName,
+                                        author: book.author,
+                                        onTap: () {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  DetailScreen(
+                                                booksModel: book,
+                                              ),
                                             ),
-                                          ),
-                                        );
-                                      },
-                                      categoryName: book.categoryName,
-                                      rate: book.rate.toString(),
-                                      price: book.price.toString(),
-                                    ),
+                                          );
+                                        },
+                                        categoryName: book.categoryName,
+                                        rate: book.rate.toString(),
+                                        price: book.price.toString()),
                                   ),
                             ],
                           ),
