@@ -66,7 +66,7 @@ class BookItem extends StatelessWidget {
                 ),
                 fontSize: 13.sp,
               ),
-              maxLines: 2,
+              maxLines: 1,
               overflow: TextOverflow.ellipsis,
             ),
             SizedBox(
@@ -97,7 +97,7 @@ class BookItem extends StatelessWidget {
                         ),
                         fontSize: 13.sp,
                       ),
-                      maxLines: 2,
+                      maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
                     SizedBox(
