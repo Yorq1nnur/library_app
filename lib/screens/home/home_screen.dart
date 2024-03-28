@@ -51,7 +51,7 @@ class HomeScreenState extends State<HomeScreen> {
                 16.r,
               ),
               child: Image.asset(
-                AppImages.library,
+                AppImages.amiriy,
                 height: 30.h,
                 width: 30.h,
                 fit: BoxFit.contain,
@@ -59,9 +59,9 @@ class HomeScreenState extends State<HomeScreen> {
             ),
           ),
           title: Text(
-            "My Library",
+            "AMIRIY KUTUBXONASI",
             style: AppTextStyle.interBold
-                .copyWith(color: AppColors.black, fontSize: 24.sp),
+                .copyWith(color: AppColors.black, fontSize: 16.sp),
           ),
           actions: [
             IconButton(
