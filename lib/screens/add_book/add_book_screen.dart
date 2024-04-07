@@ -206,8 +206,8 @@ class _AddBookScreenState extends State<AddBookScreen> {
                                 categoryName: newBook[2],
                                 description: newBook[3],
                                 imageUrl: newBook[4],
-                                price: int.parse(newBook[5]),
-                                rate: double.parse(newBook[6]),
+                                price: newBook[5],
+                                rate: newBook[6],
                               );
                               await context.read<BookViewModel>().addBook(book);
                             } else {
