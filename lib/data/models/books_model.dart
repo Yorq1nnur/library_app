@@ -2,12 +2,12 @@ class BooksModel {
   final String? uuid;
   final String bookName;
   final String author;
-  final int? categoryId;
+  final String? categoryId;
   final String categoryName;
   final String description;
   final String imageUrl;
-  final int price;
-  final double rate;
+  final String price;
+  final String rate;
 
   BooksModel({
      this.uuid,
@@ -26,12 +26,12 @@ class BooksModel {
       uuid: json['_uuid'] as String? ?? "",
       bookName: json['name'] as String? ?? "",
       author: json['author'] as String? ?? "",
-      categoryId: json['category_id'] as int? ?? 0,
+      categoryId: json['_uuid'] as String? ?? "",
       categoryName: json['category_name'] as String? ?? "",
       description: json['description'] as String? ?? "",
       imageUrl: json['image_url'] as String? ?? "",
-      price: json['price'] as int? ?? 0,
-      rate: json['rate'].toDouble() as double? ?? 0.0,
+      price: json['price'] as String? ?? '',
+      rate: json['rate']as String? ?? '',
     );
   }
 
@@ -53,12 +53,12 @@ class BooksModel {
     String? uuid,
     String? name,
     String? author,
-    int? categoryId,
+    String? categoryId,
     String? categoryName,
     String? description,
     String? imageUrl,
-    int? price,
-    double? rate,
+    String? price,
+    String? rate,
   }) {
     return BooksModel(
       uuid: uuid ?? this.uuid,

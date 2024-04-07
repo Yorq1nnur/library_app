@@ -33,8 +33,6 @@ class _UpdateScreenState extends State<UpdateScreen> {
     "",
   ];
 
-
-
   @override
   Widget build(BuildContext context) {
     const TextInputType bookNameType = TextInputType.text;
@@ -173,16 +171,16 @@ class _UpdateScreenState extends State<UpdateScreen> {
                             imageUrl: changeData[4] == ''
                                 ? widget.booksModel.imageUrl
                                 : changeData[4],
-                            price: int.parse(changeData[5] == ''
-                                ? widget.booksModel.price.toString()
-                                : changeData[5]),
-                            rate: double.parse(changeData[6] == ''
-                                ? widget.booksModel.rate.toString()
-                                : changeData[6],),
+                            price: changeData[5] == ''
+                                ? widget.booksModel.price
+                                : changeData[5],
+                            rate: changeData[6] == ''
+                                ? widget.booksModel.rate
+                                : changeData[6],
                             uuid: widget.booksModel.uuid,
                           );
                           await context.read<BookViewModel>().updateBook(book);
-                          if(context.mounted){
+                          if (context.mounted) {
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
                                 content: Text(
